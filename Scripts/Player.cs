@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class Player : CharacterBody3D
 {
@@ -39,5 +40,6 @@ public partial class Player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+		GD.Print(Rotation);
 	}
 }

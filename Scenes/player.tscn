@@ -1,15 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkk125053kpjy"]
+[gd_scene load_steps=5 format=3 uid="uid://bkk125053kpjy"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ge12h"]
+[ext_resource type="Texture2D" uid="uid://bnyf7t56adfrf" path="res://icon.svg" id="2_oke0p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
 
-[node name="CharacterBody3D" type="CharacterBody3D"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hmrye"]
+
+[node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ge12h")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_bq1y3")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_hmrye")
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+texture = ExtResource("2_oke0p")
