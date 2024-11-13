@@ -9,36 +9,36 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hmrye"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uij8m"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4orb6"]
 atlas = ExtResource("4_uioss")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gg0o5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftyeg"]
 atlas = ExtResource("4_uioss")
 region = Rect2(0, 64, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g6i38"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sd7iy"]
 atlas = ExtResource("4_uioss")
 region = Rect2(0, 128, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vjvyh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jntnd"]
 atlas = ExtResource("4_uioss")
 region = Rect2(0, 192, 64, 64)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yxtd4"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_x3tb6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uij8m")
+"texture": SubResource("AtlasTexture_4orb6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gg0o5")
+"texture": SubResource("AtlasTexture_ftyeg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g6i38")
+"texture": SubResource("AtlasTexture_sd7iy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vjvyh")
+"texture": SubResource("AtlasTexture_jntnd")
 }],
 "loop": true,
 "name": &"default",
@@ -47,6 +47,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ge12h")
+Speed = 2.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_bq1y3")
@@ -55,8 +56,8 @@ shape = SubResource("CapsuleShape3D_bq1y3")
 visible = false
 mesh = SubResource("CapsuleMesh_hmrye")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 2
+[node name="Sprite3D" type="Sprite3D" parent="." node_paths=PackedStringArray("player")]
 texture = ExtResource("2_oke0p")
 script = ExtResource("3_plsy7")
-perspectives = SubResource("SpriteFrames_yxtd4")
+perspectives = SubResource("SpriteFrames_x3tb6")
+player = NodePath("..")
