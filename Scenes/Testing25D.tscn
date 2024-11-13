@@ -11,7 +11,7 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93744, -2.59594)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.937, -3)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)

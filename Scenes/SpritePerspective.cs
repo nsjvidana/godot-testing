@@ -32,10 +32,10 @@ public partial class SpritePerspective : Sprite3D {
 		//requires that  we know the rotation for billboarding.
 		var camPos = GetViewport().GetCamera3D().GlobalTransform.Origin;
 			camPos.Y = 0;
-		var currYPos = GlobalPosition.Y;
-		GlobalPosition = new Vector3(GlobalPosition.X, 0f, GlobalPosition.Z);//temporarily set y pos to 0 for LookAt calculation
+		// var currYPos = GlobalPosition.Y;
+		// GlobalPosition = new Vector3(GlobalPosition.X, 0f, GlobalPosition.Z);//temporarily set y pos to 0 for LookAt calculation
 		LookAt(camPos, Vector3.Up);
-		GlobalPosition = new Vector3(GlobalPosition.X, currYPos, GlobalPosition.Z);
+		// GlobalPosition = new Vector3(GlobalPosition.X, currYPos, GlobalPosition.Z);
 
 		//0 - back
 		//1 - facing left
@@ -43,10 +43,11 @@ public partial class SpritePerspective : Sprite3D {
 		//3 - facing right
 		var rotDiff = Rotation.Y - player.Rotation.Y;
 		var rotDiffAbs = Mathf.Abs(rotDiff);
+		GD.Print(rotDiff);
 		if(rotDiffAbs <= Mathf.Pi/8f) 
-			Texture = perspectives.GetFrameTexture("default", 2);
+			Texture = perspectives.GetFrameTexture("default", 0);
 		else if(Mathf.Abs(rotDiffAbs-Mathf.Pi/8f) <= Mathf.Pi/8f) {
-			
+			Texture = perspectives.GetFrameTexture("default", 1);
 		}
 		
 		// else if(Mathf.Abs(rotDiffAbs-Mathf.Pi/2f) <= Mathf.Pi/4f) {
