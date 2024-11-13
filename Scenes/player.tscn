@@ -1,11 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkk125053kpjy"]
+[gd_scene load_steps=12 format=3 uid="uid://bkk125053kpjy"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ge12h"]
 [ext_resource type="Texture2D" uid="uid://bnyf7t56adfrf" path="res://icon.svg" id="2_oke0p"]
+[ext_resource type="Script" path="res://Scenes/SpritePerspective.cs" id="3_plsy7"]
+[ext_resource type="Texture2D" uid="uid://di5rjptdv1kxn" path="res://Assets/lpc_entry/png/walkcycle/BODY_skeleton.png" id="4_uioss"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hmrye"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uij8m"]
+atlas = ExtResource("4_uioss")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg0o5"]
+atlas = ExtResource("4_uioss")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g6i38"]
+atlas = ExtResource("4_uioss")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjvyh"]
+atlas = ExtResource("4_uioss")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yxtd4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uij8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gg0o5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g6i38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vjvyh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ge12h")
@@ -20,3 +58,5 @@ mesh = SubResource("CapsuleMesh_hmrye")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
 texture = ExtResource("2_oke0p")
+script = ExtResource("3_plsy7")
+perspectives = SubResource("SpriteFrames_yxtd4")

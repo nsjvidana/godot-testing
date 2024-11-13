@@ -23,6 +23,9 @@ public partial class Player : CharacterBody3D
 			velocity.Y = JumpVelocity;
 		}
 
+		var ae = new AnimatedSprite2D();
+
+
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
@@ -40,6 +43,5 @@ public partial class Player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
-		GD.Print(Rotation);
 	}
 }
