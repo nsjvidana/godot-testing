@@ -42,13 +42,26 @@ public partial class SpritePerspective : Sprite3D {
 		//2 - front
 		//3 - facing right
 		var rotDiff = Rotation.Y - player.Rotation.Y;
-		var rotDiffAbs = Mathf.Abs(rotDiff);
 		GD.Print(rotDiff);
-		if(rotDiffAbs <= Mathf.Pi/8f) 
-			Texture = perspectives.GetFrameTexture("default", 0);
-		else if(Mathf.Abs(rotDiffAbs-Mathf.Pi/8f) <= Mathf.Pi/8f) {
-			Texture = perspectives.GetFrameTexture("default", 1);
+		var rotDiffAbs = Mathf.Abs(rotDiff);
+
+		
+		for(int i = 0; i < 4; i++) {
+			
 		}
+		if(rotDiffAbs <= Mathf.Pi/4f) 
+			Texture = perspectives.GetFrameTexture("default", 0);
+		else if(Mathf.Abs(rotDiffAbs-Mathf.Pi/4f) <= Mathf.Pi/4f) 
+			Texture = perspectives.GetFrameTexture("default", Mathf.Sign(rotDiff) == 1 ? 1:1);
+		else if(Mathf.Abs(rotDiffAbs - 2f*Mathf.Pi/4f) <= Mathf.Pi/4f)
+			Texture = perspectives.GetFrameTexture("default", Mathf.Sign(rotDiff) == 1 ? 2:2);
+		else if(Mathf.Abs(rotDiffAbs - 3f*Mathf.Pi/4f) <= Mathf.Pi/4f)
+			Texture = perspectives.GetFrameTexture("default", Mathf.Sign(rotDiff) == 1 ? 3:3);
+		else if(Mathf.Abs(rotDiffAbs - 4f*Mathf.Pi/4f) <= Mathf.Pi/4f) {
+			GD.Print("ae");
+			Texture = perspectives.GetFrameTexture("default", Mathf.Sign(rotDiff) == 1 ? 4:4);
+		}
+
 		
 		// else if(Mathf.Abs(rotDiffAbs-Mathf.Pi/2f) <= Mathf.Pi/4f) {
 		// 	if(Mathf.Sign(rotDiff) == 1)
