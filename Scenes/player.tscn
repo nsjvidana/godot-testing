@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkk125053kpjy"]
+[gd_scene load_steps=17 format=3 uid="uid://bkk125053kpjy"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ge12h"]
-[ext_resource type="Texture2D" uid="uid://bnyf7t56adfrf" path="res://icon.svg" id="2_oke0p"]
 [ext_resource type="Script" path="res://Scenes/SpritePerspective.cs" id="3_plsy7"]
+[ext_resource type="Texture2D" uid="uid://bp26y6bkv5a6v" path="res://Assets/lpc_entry/png/combat_dummy/BODY_animation.png" id="4_k0jym"]
 [ext_resource type="Texture2D" uid="uid://di5rjptdv1kxn" path="res://Assets/lpc_entry/png/walkcycle/BODY_skeleton.png" id="4_uioss"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
+radius = 0.169134
+height = 0.580852
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hmrye"]
 
@@ -13,32 +15,64 @@
 atlas = ExtResource("4_uioss")
 region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ftyeg"]
-atlas = ExtResource("4_uioss")
-region = Rect2(0, 64, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_vigni"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sd7iy"]
-atlas = ExtResource("4_uioss")
-region = Rect2(0, 128, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwjia"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_jntnd"]
-atlas = ExtResource("4_uioss")
-region = Rect2(0, 192, 64, 64)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo4dx"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yok8s"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e1ko"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hr0ib"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akhvx"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_580u0"]
+atlas = ExtResource("4_k0jym")
+region = Rect2(448, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_x3tb6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4orb6")
+"texture": SubResource("AtlasTexture_vigni")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ftyeg")
+"texture": SubResource("AtlasTexture_bwjia")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sd7iy")
+"texture": SubResource("AtlasTexture_fo4dx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_jntnd")
+"texture": SubResource("AtlasTexture_yok8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e1ko")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hr0ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akhvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_580u0")
 }],
 "loop": true,
 "name": &"default",
@@ -57,7 +91,8 @@ visible = false
 mesh = SubResource("CapsuleMesh_hmrye")
 
 [node name="Sprite3D" type="Sprite3D" parent="." node_paths=PackedStringArray("player")]
-texture = ExtResource("2_oke0p")
+texture_filter = 0
+texture = SubResource("AtlasTexture_4orb6")
 script = ExtResource("3_plsy7")
 perspectives = SubResource("SpriteFrames_x3tb6")
 player = NodePath("..")
