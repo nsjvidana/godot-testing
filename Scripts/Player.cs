@@ -9,7 +9,14 @@ public partial class Player : CharacterBody3D
 	[Export]
 	public float JumpVelocity = 4.5f;
 
-	public override void _PhysicsProcess(double delta)
+	SpringArm3D springArm;
+
+    public override void _Ready()
+    {
+        springArm = GetNode<SpringArm3D>("SpringArm3D");
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector3 velocity = Velocity;
 
@@ -25,13 +32,12 @@ public partial class Player : CharacterBody3D
 			velocity.Y = JumpVelocity;
 		}
 
-		var ae = new AnimatedSprite2D();
-
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 inputDir = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
+			direction = direction.Rotated(Vector3.Up, springArm.Rotation.Y).Normalized();
 		if (direction != Vector3.Zero)
 		{
 			velocity.X = direction.X * Speed;
@@ -45,5 +51,10 @@ public partial class Player : CharacterBody3D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		if(Velocity.LengthSquared() > 0.04) {
+			var lookDir = new Vector2(Velocity.Z, Velocity.X);
+		}
+
 	}
 }

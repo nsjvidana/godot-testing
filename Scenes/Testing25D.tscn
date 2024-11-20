@@ -23,8 +23,5 @@ shape = SubResource("BoxShape3D_oshsr")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/GroundCollision"]
 mesh = SubResource("BoxMesh_l6fbf")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73343, 2.62687e-07)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.93358, -0.358368, 0, 0.278504, 0.725528, -0.62932, 0.225528, 0.587521, 0.777146, -1, 5.93744, -13)
