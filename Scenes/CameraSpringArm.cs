@@ -9,7 +9,7 @@ public partial class CameraSpringArm : SpringArm3D
 
 	public override void _Ready()
 	{
-		// TopLevel = true;
+		TopLevel = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
 
