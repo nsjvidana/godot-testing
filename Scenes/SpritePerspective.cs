@@ -29,7 +29,7 @@ public partial class SpritePerspective : Sprite3D {
 		var rotDiff = Rotation.Y - player.Rotation.Y;
 		var rot2Pi = rotDiff < 0 ? rotDiff + 2*Mathf.Pi : rotDiff;
 
-		int index = (int)(rot2Pi / Mathf.Tau * 7);
+		int index = (int)(rot2Pi / Mathf.Tau * frameCount);
 		Texture = perspectives.GetFrameTexture("default", index);
 	}
 }
