@@ -147,13 +147,12 @@ shape = SubResource("CapsuleShape3D_bq1y3")
 visible = false
 mesh = SubResource("CapsuleMesh_hmrye")
 
-[node name="Sprite3D" type="Sprite3D" parent="." node_paths=PackedStringArray("player")]
+[node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 1
 texture_filter = 0
 texture = SubResource("AtlasTexture_wcnxs")
 script = ExtResource("3_plsy7")
 perspectives = SubResource("SpriteFrames_x3tb6")
-player = NodePath("..")
 metadata/_edit_lock_ = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]

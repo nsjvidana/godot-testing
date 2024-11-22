@@ -6,7 +6,7 @@ public partial class SpritePerspective : Sprite3D {
 	[Export]
 	public SpriteFrames perspectives;
 	[Export]
-	public Node3D player;
+	public Node3D curr;
 
 	double dt;
 	int spriteIndex;
@@ -24,10 +24,10 @@ public partial class SpritePerspective : Sprite3D {
 		var dirToCamera3d = camPos - thisPos;
 		var dirToCamera = new Vector2(dirToCamera3d.X, dirToCamera3d.Z);
 		
-		var playerDir3d = player.Quaternion * Vector3.Forward;
-		var playerDir = new Vector2(playerDir3d.X, playerDir3d.Z);
+		var currDir3d = this.Quaternion * Vector3.Forward;
+		var currDir = new Vector2(currDir3d.X, currDir3d.Z);
 		
-		var rotDisp = playerDir.AngleTo(dirToCamera);
+		var rotDisp = currDir.AngleTo(dirToCamera);
 		var rot2Pi = rotDisp < 0 ? (rotDisp + Mathf.Tau) : rotDisp;
 
 		if(rot2Pi != Mathf.Tau) {

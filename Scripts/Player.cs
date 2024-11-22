@@ -43,8 +43,8 @@ public partial class Player : CharacterBody3D
 		if (direction != Vector3.Zero) {
 			velocity.X = direction.X * Speed;
 			velocity.Z = direction.Z * Speed;
-			var lookDir = new Vector2(direction.Z, direction.X);
-			// sprite.Rotation = new Vector3(sprite.Rotation.X, lookDir.Angle(), sprite.Rotation.Z);
+			var lookDir = new Vector2(direction.X, direction.Z);
+			sprite.Rotation = new Vector3(sprite.Rotation.X, -new Vector2(0, -1).AngleTo(lookDir), sprite.Rotation.Z);
 		}
 		else {
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
