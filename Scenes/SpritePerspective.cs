@@ -28,11 +28,11 @@ public partial class SpritePerspective : Sprite3D {
 		var currDir = new Vector2(currDir3d.X, currDir3d.Z);
 		
 		var rotDisp = currDir.AngleTo(dirToCamera);
-		var rot2Pi = rotDisp < 0 ? (rotDisp + Mathf.Tau) : rotDisp;
+		var rot2Pi = rotDisp < 0 ? (rotDisp + Mathf.Tau)%Mathf.Tau : rotDisp;
 
-		if(rot2Pi != Mathf.Tau) {
-			int index = (int)(rot2Pi / Mathf.Tau * frameCount);
-			Texture = perspectives.GetFrameTexture("default", index);
-		}
+		//the "%Mathf.Tau" when calculating rot2Pi prevents rot2Pi/Mathf.Tau from becoming 1.
+		//this lets us multiply by the frameCount with no worries of an out-of-bounds index.
+		int index = (int)(rot2Pi / Mathf.Tau * frameCount);
+		Texture = perspectives.GetFrameTexture("default", index);
 	}
 }
