@@ -8,6 +8,8 @@ public partial class SpritePerspective : Sprite3D {
 	[Export]
 	public Node3D curr;
 
+	public Quaternion spriteRot = Quaternion.Identity;
+
 	double dt;
 	int spriteIndex;
 	int frameCount;
@@ -24,7 +26,7 @@ public partial class SpritePerspective : Sprite3D {
 		var dirToCamera3d = camPos - thisPos;
 		var dirToCamera = new Vector2(dirToCamera3d.X, dirToCamera3d.Z);
 		
-		var currDir3d = this.Quaternion * Vector3.Forward;
+		var currDir3d = spriteRot * Vector3.Forward;
 		var currDir = new Vector2(currDir3d.X, currDir3d.Z);
 		
 		var rotDisp = currDir.AngleTo(dirToCamera);

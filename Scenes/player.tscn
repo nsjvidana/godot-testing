@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://ohoqybgywrrs" path="res://Assets/scarecrow-16-dir.png" id="4_uka1q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
-radius = 0.169134
-height = 0.580852
+radius = 0.158921
+height = 0.397823
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hmrye"]
 
@@ -141,6 +141,7 @@ script = ExtResource("1_ge12h")
 Speed = 2.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0386759, 0)
 shape = SubResource("CapsuleShape3D_bq1y3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -149,6 +150,7 @@ mesh = SubResource("CapsuleMesh_hmrye")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 1
+alpha_cut = 2
 texture_filter = 0
 texture = SubResource("AtlasTexture_68pgr")
 script = ExtResource("3_plsy7")

@@ -10,12 +10,12 @@ public partial class Player : CharacterBody3D
 	public float JumpVelocity = 4.5f;
 
 	SpringArm3D springArm;
-	Sprite3D sprite;
+	SpritePerspective spritePerspective;
 
     public override void _Ready()
     {
         springArm = GetNode<SpringArm3D>("SpringArm3D");
-        sprite = GetNode<Sprite3D>("Sprite3D");
+        spritePerspective = GetNode<Sprite3D>("Sprite3D") as SpritePerspective;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -44,7 +44,7 @@ public partial class Player : CharacterBody3D
 			velocity.X = direction.X * Speed;
 			velocity.Z = direction.Z * Speed;
 			var lookDir = new Vector2(direction.X, direction.Z);
-			sprite.Rotation = new Vector3(sprite.Rotation.X, -new Vector2(0, -1).AngleTo(lookDir), sprite.Rotation.Z);
+			spritePerspective.spriteRot = Quaternion.FromEuler(new Vector3(0f, -new Vector2(0, -1).AngleTo(lookDir), 0f));
 		}
 		else {
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
