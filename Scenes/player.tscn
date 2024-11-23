@@ -1,9 +1,9 @@
 [gd_scene load_steps=29 format=3 uid="uid://bkk125053kpjy"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ge12h"]
-[ext_resource type="Script" path="res://Scenes/SpritePerspective.cs" id="3_plsy7"]
+[ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="3_plsy7"]
 [ext_resource type="Texture2D" uid="uid://da651jqtufn56" path="res://Assets/scarecrow-8-dir.png" id="3_xh8st"]
-[ext_resource type="Script" path="res://Scenes/CameraSpringArm.cs" id="4_u5is8"]
+[ext_resource type="Script" path="res://Scripts/CameraSpringArm.cs" id="4_u5is8"]
 [ext_resource type="Texture2D" uid="uid://ohoqybgywrrs" path="res://Assets/scarecrow-16-dir.png" id="4_uka1q"]
 [ext_resource type="Shader" path="res://Assets/new_shader.gdshader" id="6_8c1s2"]
 
