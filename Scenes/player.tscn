@@ -144,6 +144,7 @@ size = Vector2(2, 2)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t5r23"]
 render_priority = 0
 shader = ExtResource("6_8c1s2")
+shader_parameter/downsample_factor = 0.0
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_ge12h")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=8 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
+[ext_resource type="PackedScene" uid="uid://b1jmnw2uimmuc" path="res://Scenes/test_animation.tscn" id="2_kyj7k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -17,7 +18,7 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 [node name="Node3D" type="Node3D"]
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.316, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2105, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)
@@ -33,14 +34,17 @@ mesh = SubResource("BoxMesh_l6fbf")
 transform = Transform3D(0.999999, 0, 0, 0, 0.590859, 0.806775, 0, -0.806775, 0.590859, -1, 5.93744, -13)
 shadow_enabled = true
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="ForwardCuboid" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.75392)
 mesh = SubResource("BoxMesh_fslow")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+[node name="RightSphere" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.74131, -1.03414e-05, -2.14652)
 mesh = SubResource("SphereMesh_v6h18")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+[node name="LeftPrism" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45386, -1.03414e-05, 0.161709)
 mesh = SubResource("PrismMesh_h1smq")
+
+[node name="idle_animation" parent="." instance=ExtResource("2_kyj7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449599, 0, 0)
