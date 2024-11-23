@@ -2,6 +2,7 @@ shader_type spatial;
 // Prevent the quad from being affected by lighting and fog. This also improves performance.
 render_mode unshaded, fog_disabled;
 
+uniform float downsample_factor = 0.0;
 uniform sampler2D depth_texture : source_color, hint_depth_texture;
 uniform sampler2D screen_texture : hint_screen_texture, filter_nearest;
 
@@ -22,7 +23,7 @@ void fragment() {
 	// Visualize linear depth
 	//ALBEDO.rgb = vec3(fract(linear_depth));
 	
-	vec2 UV_new = SCREEN_UV - mod(SCREEN_UV, 1.0/VIEWPORT_SIZE * 4.0);
+	vec2 UV_new = SCREEN_UV - mod(SCREEN_UV, 1.0/VIEWPORT_SIZE * downsample_factor);
 	vec2 resolution = VIEWPORT_SIZE;
 	
 	vec4 color = texture(screen_texture, UV_new).rgba;
