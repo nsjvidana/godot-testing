@@ -24,12 +24,13 @@ public partial class SpritePerspective : Sprite3D {
 		var camPos = GetViewport().GetCamera3D().GlobalTransform.Origin;
 		var thisPos = this.GlobalTransform.Origin;
 		var dirToCamera3d = camPos - thisPos;
-		var dirToCamera = new Vector2(dirToCamera3d.X, dirToCamera3d.Z);
 		
-		var currDir3d = spriteRot * Vector3.Forward;
-		var currDir = new Vector2(currDir3d.X, currDir3d.Z);
+		var currUp = spriteRot * Vector3.Up;
+		//project vectors onto local XZ plane
+		var currDirProj = spriteRot * Vector3.Forward;//already lies on on local XZ plane
+		var dirToCameraProj = MathUtils.ProjectOnPlane(dirToCamera3d, currUp);
 		
-		var rotDisp = currDir.AngleTo(dirToCamera);
+		var rotDisp = currDirProj.SignedAngleTo(dirToCameraProj, -currUp);
 		var rot2Pi = rotDisp < 0 ? (rotDisp + Mathf.Tau) : rotDisp;
 			// rot2Pi = (float)Mathf.Snapped(rot2Pi, 0.000001);
 
