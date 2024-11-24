@@ -168,6 +168,7 @@ script = ExtResource("4_u5is8")
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="SpringArm3D/Camera3D"]
+visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_d3r4e")
 skeleton = NodePath("../../..")
