@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
-[ext_resource type="PackedScene" uid="uid://b1jmnw2uimmuc" path="res://Scenes/test_animation.tscn" id="2_kyj7k"]
+[ext_resource type="PackedScene" uid="uid://bpl8uy6bi1w7f" path="res://Assets/waving_animation.glb" id="2_vnd7k"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -46,5 +46,5 @@ mesh = SubResource("SphereMesh_v6h18")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45386, -1.03414e-05, 0.161709)
 mesh = SubResource("PrismMesh_h1smq")
 
-[node name="idle_animation" parent="." instance=ExtResource("2_kyj7k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.449599, 0.221196, 0)
+[node name="waving_animation" parent="." instance=ExtResource("2_vnd7k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.822535, 0, 0)
