@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://qimwsyq784qf"]
+
+[ext_resource type="PackedScene" uid="uid://bdgsrcsuj1xnr" path="res://Assets/wave_animation.glb" id="1_8465k"]
+[ext_resource type="Script" path="res://Scripts/SpriteArmature.cs" id="2_0orsm"]
+[ext_resource type="PackedScene" uid="uid://b2gwt76j1nvtk" path="res://Scenes/sprite3d_scene.tscn" id="3_0ouky"]
+[ext_resource type="Script" path="res://Scripts/PlayTestAnimation.cs" id="3_1xomv"]
+[ext_resource type="Texture2D" uid="uid://fj77laoenjvh" path="res://Assets/test_sprite.png" id="4_hm51l"]
+
+[node name="wave_animation" instance=ExtResource("1_8465k")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-4.75763, 3.77058, -53.3357)
+bones/0/rotation = Quaternion(-0.696009, -0.00416248, -0.00175807, 0.718019)
+bones/1/rotation = Quaternion(-0.0570079, 0.00161848, 0.00276344, 0.998369)
+bones/2/rotation = Quaternion(7.80716e-05, 0.00278917, 0.0048393, 0.999984)
+bones/3/rotation = Quaternion(7.81039e-05, 0.00278917, 0.0048393, 0.999984)
+bones/4/rotation = Quaternion(0.172423, 0.0270456, -0.0209042, 0.98443)
+bones/5/rotation = Quaternion(-0.0913642, -0.0468464, 0.0305256, 0.994247)
+bones/7/rotation = Quaternion(-0.552153, -0.459915, 0.544976, -0.43198)
+bones/8/rotation = Quaternion(0.50014, 0.360381, 0.13096, 0.776425)
+bones/9/rotation = Quaternion(-0.0123646, 0.00966325, 0.220134, 0.975343)
+bones/11/rotation = Quaternion(0.580935, -0.45037, 0.512497, 0.443878)
+bones/12/rotation = Quaternion(0.479514, -0.354322, -0.13061, 0.792126)
+bones/13/rotation = Quaternion(-0.0344183, 0.0540793, -0.228787, 0.971364)
+bones/15/rotation = Quaternion(-0.0710777, 0.0316392, 0.995092, -0.0611403)
+bones/16/rotation = Quaternion(-0.108752, 0.00118325, -0.0510824, 0.992755)
+bones/17/rotation = Quaternion(0.617757, 0.460878, -0.341162, 0.538123)
+bones/18/rotation = Quaternion(-0.110265, 0.0672382, 0.990467, 0.047918)
+bones/19/rotation = Quaternion(-0.121059, 0.00114201, 0.0521832, 0.991272)
+bones/20/rotation = Quaternion(0.574924, -0.491565, 0.374573, 0.536211)
+script = ExtResource("2_0orsm")
+sprite3dScene = ExtResource("3_0ouky")
+spriteTexture = ExtResource("4_hm51l")
+
+[node name="AnimationPlayer" parent="." index="1"]
+script = ExtResource("3_1xomv")

@@ -28,7 +28,8 @@ public partial class SpriteArmature : Skeleton3D
         var sceneInstance = sprite3dScene.Instantiate();
             AddChild(sceneInstance);
         spineSprite = sceneInstance.GetNode<Sprite3D>("Sprite3D");
-        spineSprite.Texture = spriteTexture;
+            spineSprite.TopLevel = true;
+            spineSprite.Texture = spriteTexture;
 
         var boneNames = this.GetConcatenatedBoneNames().ToString().Split(',');
         int idx = 0;
@@ -50,18 +51,13 @@ public partial class SpriteArmature : Skeleton3D
     public override void _Process(double delta)
     {
         var spineRelative = GetBoneGlobalPose(spineIdx);
-        var newSpineRot = this.GlobalTransform.Basis.GetRotationQuaternion() * spineRelative.Basis.GetRotationQuaternion();
-        var newSpineOrigin = this.GlobalTransform.Origin + spineRelative.Origin;
+        var spineGlobal = this.GlobalTransform * spineRelative;
 
-        var currScale = this.GlobalTransform.Basis.Scale;
-        var invScale = new Vector3(1f/currScale.X, 1f/currScale.Y, 1f/currScale.Z);
         spineSprite.GlobalTransform = new Transform3D(
-            new Basis(newSpineRot),
-            newSpineOrigin
+            new Basis(spineGlobal.Basis.GetRotationQuaternion()),
+            spineGlobal.Origin
         );
-        // spineSprite.Scale = spineSprite.Transform.Basis.Scale;
-        GD.Print(spineSprite.GlobalTransform.Basis.Scale);
-
+        spineSprite.GlobalTransform.Scaled(spineSprite.GlobalTransform.Basis.Scale);
     }
 
 
