@@ -6,11 +6,12 @@ public partial class CameraSpringArm : SpringArm3D
 	
 	[Export]
 	public float mouse_sensitivity = 0.05f;
+	
+	bool capturedMouse = true;
 
 	public override void _Ready()
 	{
-		// TopLevel = true;
-		Input.MouseMode = Input.MouseModeEnum.Captured;
+		Input.MouseMode = capturedMouse ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
 	}
 
     public override void _UnhandledInput(InputEvent @event)
@@ -23,6 +24,13 @@ public partial class CameraSpringArm : SpringArm3D
 				yRot = Mathf.Wrap(yRot, 0f, 360f);
 			
 			RotationDegrees = new Vector3(xRot, yRot, 0);
+		}
+		else if(@event is InputEventKey) {
+			var keyEvent = @event as InputEventKey;
+			if(keyEvent.Keycode == Key.Escape && keyEvent.IsPressed()) {
+				capturedMouse = !capturedMouse;
+				Input.MouseMode = capturedMouse ? Input.MouseModeEnum.Captured : Input.MouseModeEnum.Visible;
+			}
 		}
     }
 
