@@ -32,7 +32,6 @@ public partial class SpritePerspective : Sprite3D {
 		
 		var rotDisp = currDirProj.SignedAngleTo(dirToCameraProj, -currUp);
 		var rot2Pi = rotDisp < 0 ? (rotDisp + Mathf.Tau) : rotDisp;
-			// rot2Pi = (float)Mathf.Snapped(rot2Pi, 0.000001);
 
 
 		//"interpolate" between frames with a t value

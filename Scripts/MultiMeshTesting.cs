@@ -3,9 +3,18 @@ using System;
 
 public partial class MultiMeshTesting : MultiMeshInstance3D
 {
-	// Called when the node enters the scene tree for the first time.
+	
+	[Export]
+	public Texture2D spritesheet;
+
 	public override void _Ready()
 	{
+		var mat = Multimesh.Mesh.SurfaceGetMaterial(0);
+		if(mat is ShaderMaterial) {
+			var shader = (mat as ShaderMaterial);
+			shader.SetShaderParameter("spritesheet", spritesheet);
+			shader.SetShaderParameter("num_perspectives", 16);
+		}
 		Multimesh.InstanceCount = 100;
 		for(int i = 0; i < Multimesh.InstanceCount; i++) {
 			var transform = Transform3D.Identity.Translated(new Vector3(i*1.5f, 0f, 0f));
