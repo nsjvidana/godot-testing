@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://qimwsyq784qf"]
+[gd_scene load_steps=6 format=3 uid="uid://dlivj16euv5vh"]
 
 [ext_resource type="PackedScene" uid="uid://bdgsrcsuj1xnr" path="res://Assets/wave_animation.glb" id="1_8465k"]
 [ext_resource type="Script" path="res://Scripts/SpriteArmature.cs" id="2_0orsm"]
-[ext_resource type="PackedScene" uid="uid://b2gwt76j1nvtk" path="res://Scenes/sprite3d_scene.tscn" id="3_0ouky"]
+[ext_resource type="PackedScene" path="res://Scenes/sprite3d_scene.tscn" id="3_0ouky"]
 [ext_resource type="Script" path="res://Scripts/PlayTestAnimation.cs" id="3_1xomv"]
 [ext_resource type="Texture2D" uid="uid://fj77laoenjvh" path="res://Assets/test_sprite.png" id="4_hm51l"]
 

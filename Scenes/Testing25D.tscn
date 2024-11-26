@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=11 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
-[ext_resource type="PackedScene" uid="uid://qimwsyq784qf" path="res://Scenes/wave_animation.tscn" id="2_kpw08"]
+[ext_resource type="PackedScene" uid="uid://dlivj16euv5vh" path="res://Scenes/wave_animation.tscn" id="2_kpw08"]
+[ext_resource type="Script" path="res://Scenes/MultiMeshTesting.cs" id="3_w6ty4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -14,6 +15,12 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 [sub_resource type="SphereMesh" id="SphereMesh_v6h18"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_h1smq"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_sh4oi"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_r6jqf"]
+transform_format = 1
+mesh = SubResource("QuadMesh_sh4oi")
 
 [node name="Node3D" type="Node3D"]
 
@@ -48,3 +55,8 @@ mesh = SubResource("PrismMesh_h1smq")
 
 [node name="wave_animation" parent="." instance=ExtResource("2_kpw08")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.718124, 0, 0)
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.422422, 0)
+multimesh = SubResource("MultiMesh_r6jqf")
+script = ExtResource("3_w6ty4")
