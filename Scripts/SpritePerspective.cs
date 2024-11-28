@@ -5,8 +5,6 @@ public partial class SpritePerspective : Sprite3D {
 
 	[Export]
 	public SpriteFrames perspectives;
-	[Export]
-	public Node3D curr;
 
 	public Quaternion spriteRot = Quaternion.Identity;
 
