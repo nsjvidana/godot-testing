@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="3_plsy7"]
 [ext_resource type="Script" path="res://Scripts/CameraSpringArm.cs" id="4_u5is8"]
 [ext_resource type="Texture2D" uid="uid://cfue3dpuu6v6x" path="res://Assets/scarecrow_16_dir.png" id="4_uka1q"]
-[ext_resource type="Shader" path="res://Assets/new_shader.gdshader" id="6_8c1s2"]
+[ext_resource type="Shader" path="res://Assets/post_processing_shader.gdshader" id="6_8c1s2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
 radius = 0.158921
