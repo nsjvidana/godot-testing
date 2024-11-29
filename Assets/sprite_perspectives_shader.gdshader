@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, diffuse_burley, specular_schlick_ggx, shadows_disabled;
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
@@ -42,15 +42,30 @@ float round_to_precision(float value, float precision) {
 	return round(value * (1.0/precision)) * precision;
 }
 
+mat3 axis_angle_mat3(vec3 axis, float angle) {
+	float c = cos(angle);
+	float s = sin(angle);
+	
+	float t = 1.0 - c;
+    float x = axis.x;
+    float y = axis.y;
+    float z = axis.z;
+	
+	return mat3(
+        vec3(t * x * x + c,      t * x * y - s * z,  t * x * z + s * y),
+        vec3(t * x * y + s * z,  t * y * y + c,      t * y * z - s * x),
+        vec3(t * x * z - s * y,  t * y * z + s * x,  t * z * z + c)
+    );
+}
+
 void vertex() {
-	mat3 rot = mat3(MODEL_MATRIX);
-	vec3 up = (rot * vec3(0, 1, 0)).xyz;
-	vec3 dir_proj = (rot * vec3(0, 0, -1)).xyz;
+	vec3 local_y = MODEL_MATRIX[1].xyz;
+	vec3 dir_proj = -MODEL_MATRIX[2].xyz;
 	
 	vec3 dir_to_cam = CAMERA_POSITION_WORLD - MODEL_MATRIX[3].xyz;
-	vec3 dir_to_cam_proj = project_on_plane(dir_to_cam, up);
+	vec3 dir_to_cam_proj = project_on_plane(dir_to_cam, local_y);
 	
-	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -up);
+	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -local_y);
 	//todo: try using fma() for this
 	float rot_2pi = rot_disp + TAU * float(rot_disp < 0.0);
 	
@@ -61,13 +76,27 @@ void vertex() {
 	//todo: calculate UV y coord offset for full sprite armature
 	//	(might wanna make uv_offset_x into a single vec2)
 	
+	mat3 rot = mat3(MODEL_MATRIX);
 	
+	vec3 axis = cross(vec3(0,1,0), local_y);
+	float angle = signed_angle_to(vec3(0,1,0), local_y, axis);
+	mat3 billboard_rot = axis_angle_mat3(axis, angle);
+	
+	//billboard along local y axis
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-			MAIN_CAM_INV_VIEW_MATRIX[0],
-			MAIN_CAM_INV_VIEW_MATRIX[1],
-			MAIN_CAM_INV_VIEW_MATRIX[2],
+			vec4(normalize(cross(MODEL_MATRIX[1].xyz, dir_to_cam_proj)), 0),
+			MODEL_MATRIX[1],
+			vec4(normalize(dir_to_cam_proj), 0),
 			MODEL_MATRIX[3]);
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
+	
+	
+	
+		//MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+				//vec4(normalize(cross(vec3(0.0, 1.0, 0.0), MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+				//vec4(0.0, 1.0, 0.0, 0.0),
+				//vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, vec3(0.0, 1.0, 0.0))), 0.0),
+				//MODEL_MATRIX[3]);
 }
 
 void fragment() {
