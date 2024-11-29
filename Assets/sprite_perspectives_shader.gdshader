@@ -60,6 +60,14 @@ void vertex() {
 	
 	//todo: calculate UV y coord offset for full sprite armature
 	//	(might wanna make uv_offset_x into a single vec2)
+	
+	
+	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+			MAIN_CAM_INV_VIEW_MATRIX[0],
+			MAIN_CAM_INV_VIEW_MATRIX[1],
+			MAIN_CAM_INV_VIEW_MATRIX[2],
+			MODEL_MATRIX[3]);
+	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 }
 
 void fragment() {
