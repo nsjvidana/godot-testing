@@ -3,6 +3,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float alpha_scissor_threshold : hint_range(0.0, 1.0, 0.001);
 uniform float point_size : hint_range(0.1, 128.0, 0.1);
 
 uniform float roughness : hint_range(0.0, 1.0);
@@ -12,6 +13,11 @@ uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, re
 
 uniform float specular : hint_range(0.0, 1.0, 0.01);
 uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
 
 uniform sampler2D spritesheet: filter_nearest;
 uniform int num_perspectives;
@@ -57,21 +63,20 @@ void vertex() {
 }
 
 void fragment() {
-	float uv_x = uv_offset_x + UV.x / float(num_perspectives);
-	vec4 color = texture(spritesheet, vec2(uv_x, UV.y));
-	ALBEDO.rgb = color.rgb;
-	ALPHA = color.a;
+	vec2 base_uv = UV;
 
-	float metallic_tex = dot(texture(texture_metallic, UV), metallic_texture_channel);
+	float uv_x = uv_offset_x + UV.x / float(num_perspectives);
+	vec4 sprite_tex = texture(spritesheet, vec2(uv_x, UV.y));
+	ALBEDO.rgb = sprite_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
 	METALLIC = metallic_tex * metallic;
 	SPECULAR = specular;
 
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(texture(texture_roughness, UV), roughness_texture_channel);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
+	
+	ALPHA = sprite_tex.a;
+	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
 }
-
-//void light() {
-	// Called for every pixel for every light affecting the material.
-	// Uncomment to replace the default light processing function with this one.
-//}
