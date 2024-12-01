@@ -23,7 +23,7 @@ uniform sampler2D spritesheet: filter_nearest;
 uniform int num_perspectives;
 uniform int sprite_size;
 
-varying float uv_offset_x;
+varying float uv_offset_y;
 
 vec3 project_on_plane(vec3 to_proj, vec3 plane_normal) {
 	float d = dot(to_proj, plane_normal);
@@ -65,16 +65,16 @@ void vertex() {
 	vec3 dir_to_cam = CAMERA_POSITION_WORLD - MODEL_MATRIX[3].xyz;
 	vec3 dir_to_cam_proj = project_on_plane(dir_to_cam, local_y);
 	
-	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -local_y);
+	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, local_y);
 	//todo: try using fma() for this
 	float rot_2pi = rot_disp + TAU * float(rot_disp < 0.0);
 	
 	float t = round_to_precision(rot_2pi/TAU, 0.00001);
 	float index = mod(round(t * float(num_perspectives)), float(num_perspectives));
-	uv_offset_x = index / float(num_perspectives);
+	uv_offset_y = index / float(num_perspectives);
 	
 	//todo: calculate UV y coord offset for full sprite armature
-	//	(might wanna make uv_offset_x into a single vec2)
+	//	(might wanna make uv_offset_y into a single vec2)
 	
 	mat3 rot = mat3(MODEL_MATRIX);
 	
@@ -94,8 +94,8 @@ void vertex() {
 void fragment() {
 	vec2 base_uv = UV;
 
-	float uv_x = uv_offset_x + UV.x / float(num_perspectives);
-	vec4 sprite_tex = texture(spritesheet, vec2(uv_x, UV.y));
+	float uv_y = uv_offset_y + UV.y / float(num_perspectives);
+	vec4 sprite_tex = texture(spritesheet, vec2(UV.x, uv_y));
 	ALBEDO.rgb = sprite_tex.rgb;
 
 	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);

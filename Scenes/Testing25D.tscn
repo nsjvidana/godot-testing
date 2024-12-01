@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dlivj16euv5vh" path="res://Scenes/wave_animation.tscn" id="2_kpw08"]
 [ext_resource type="Shader" path="res://Assets/sprite_perspectives_shader.gdshader" id="3_6gdjo"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
-[ext_resource type="Texture2D" uid="uid://tic8cuwc1jxq" path="res://Assets/pyramid.png" id="6_nbo12"]
+[ext_resource type="Texture2D" uid="uid://pek56coyty2" path="res://Assets/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
@@ -200,7 +200,7 @@ shape = SubResource("BoxShape3D_oshsr")
 mesh = SubResource("BoxMesh_l6fbf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.999999, 0, 0, 0, 0.590859, 0.806775, 0, -0.806775, 0.590859, -1, 5.93744, -13)
+transform = Transform3D(0.999999, 0, 0, 0, -0.738255, 0.674522, 0, -0.674522, -0.738255, -1, 5.93744, -13)
 shadow_enabled = true
 
 [node name="ForwardCuboid" type="MeshInstance3D" parent="."]
