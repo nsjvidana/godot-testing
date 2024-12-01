@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=35 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="PackedScene" uid="uid://dlivj16euv5vh" path="res://Scenes/wave_animation.tscn" id="2_kpw08"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
 [ext_resource type="Texture2D" uid="uid://pek56coyty2" path="res://Assets/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
+[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/player_head.png" id="7_iyrev"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -166,8 +167,8 @@ animations = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p1duy"]
 render_priority = 0
 shader = ExtResource("3_6gdjo")
-shader_parameter/albedo = Color(0, 0, 0, 1)
-shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.115
 shader_parameter/point_size = null
 shader_parameter/roughness = null
 shader_parameter/metallic_texture_channel = null
@@ -179,7 +180,7 @@ shader_parameter/uv2_scale = null
 shader_parameter/uv2_offset = null
 shader_parameter/num_perspectives = 16
 shader_parameter/sprite_size = 32
-shader_parameter/spritesheet = ExtResource("6_nbo12")
+shader_parameter/spritesheet = ExtResource("7_iyrev")
 
 [sub_resource type="QuadMesh" id="QuadMesh_vf1a6"]
 material = SubResource("ShaderMaterial_p1duy")
@@ -233,5 +234,5 @@ script = ExtResource("6_nlrss")
 perspectives = SubResource("SpriteFrames_kn6r1")
 
 [node name="Quad" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6621, 0.364736, 1.42073)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63352, 0.764313, 1.75359)
 mesh = SubResource("QuadMesh_vf1a6")
