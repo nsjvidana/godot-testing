@@ -17,7 +17,8 @@ public partial class SpriteArmature : Node3D
     public Node3D testObj;
 
     int headIdx = -1;
-    BoneAttachment3D headBone;
+    BoneAttachment3D headBoneHead;
+    BoneAttachment3D headBoneTail;
     MultiMeshInstance3D multimeshInstance;
     Skeleton3D skeleton;
 
@@ -34,11 +35,11 @@ public partial class SpriteArmature : Node3D
             return;
         }
 
+        skeleton = this.GetNode<Skeleton3D>("Armature/Skeleton3D");
         var sceneInstance = spriteMultimeshScene.Instantiate();
             AddChild(sceneInstance);
         multimeshInstance = sceneInstance.GetNode<MultiMeshInstance3D>("MultiMeshInstance3D");
             // multimeshInstance.TopLevel = true;
-        skeleton = this.GetNode<Skeleton3D>("Armature/Skeleton3D");
         
         var mat = multimeshInstance.Multimesh.Mesh.SurfaceGetMaterial(0).Duplicate() as Material;
 		if(mat is ShaderMaterial) {
@@ -67,25 +68,38 @@ public partial class SpriteArmature : Node3D
         }
 
         //setting bone attachments
-        headBone = new BoneAttachment3D();
-        skeleton.AddChild(headBone);
-        headBone.BoneIdx = headIdx;
+        headBoneHead = new BoneAttachment3D();
+            skeleton.AddChild(headBoneHead);
+            headBoneHead.BoneIdx = headIdx;
+        headBoneTail = new BoneAttachment3D();
+            skeleton.AddChild(headBoneTail);
+            headBoneTail.BoneIdx = headIdx+1;
     }
 
     public override void _Process(double delta)
     {
-        var pos = multimeshInstance.ToLocal(headBone.GlobalPosition);
-        var euler = new Vector3(headBone.GlobalRotation.Z, headBone.GlobalRotation.Y, headBone.GlobalRotation.X);
+        var pos = multimeshInstance.ToLocal(headBoneTail.GlobalPosition);
+        var euler = new Vector3(headBoneTail.GlobalRotation.Z, headBoneTail.GlobalRotation.Y, headBoneTail.GlobalRotation.X);
         var rot = Quaternion.FromEuler(euler);
-            rot *= new Basis(rot*Vector3.Up, Mathf.Pi).GetRotationQuaternion();
-        testObj.GlobalRotation = euler;
-        var transform = Transform3D.Identity
-            .Rotated(rot.GetAxis(), rot.GetAngle())
-            .Scaled(Vector3.One * spriteScale)
-            .Translated(pos);
-        // transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(spriteScale, 2f);
-        // transform.Basis.Column1 = transform.Basis.Column1.Normalized() * spriteScale;
-        // transform.Basis.Column2 = transform.Basis.Column2.Normalized() * spriteScale;
+        var up = (headBoneTail.GlobalPosition - headBoneHead.GlobalPosition).Normalized();
+        var right = up.Cross(rot * Vector3.Forward);
+        var fwd = right.Cross(up);
+        var final_rot = new Basis(right, up, fwd);
+        testObj.GlobalRotation = final_rot.GetRotationQuaternion().GetEuler();
+        var transform = new Transform3D(
+            final_rot,
+            pos
+        );
+        // GD.Print(
+        //     $"{(headBoneTail.GlobalPosition - headBoneHead.GlobalPosition).Normalized()}\n{headBoneHead.GlobalBasis.GetRotationQuaternion() * Vector3.Up}"
+        // );
+        // Transform3D.Identity
+        //     .RotatedLocal(rot.GetAxis(), rot.GetAngle())
+        //     .ScaledLocal(Vector3.One * spriteScale)
+        //     .TranslatedLocal(pos);
+        transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(spriteScale, 2f);
+        transform.Basis.Column1 = transform.Basis.Column1.Normalized() * spriteScale;
+        transform.Basis.Column2 = transform.Basis.Column2.Normalized() * spriteScale;
 
         multimeshInstance.Multimesh.SetInstanceTransform(0, transform);
     }

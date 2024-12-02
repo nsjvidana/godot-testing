@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cqh7dwd8lyiy6"
-path="res://.godot/imported/look_behind_animation.glb-a19703559517b9ffd404242f186cd047.scn"
+uid="uid://lpk6tx64l0vm"
+path="res://.godot/imported/idle_animation.glb-ee937e4e5817829a6b087b76694d766d.scn"
 
 [deps]
 
-source_file="res://Assets/look_behind_animation.glb"
-dest_files=["res://.godot/imported/look_behind_animation.glb-a19703559517b9ffd404242f186cd047.scn"]
+source_file="res://Assets/Animations/idle_animation.glb"
+dest_files=["res://.godot/imported/idle_animation.glb-ee937e4e5817829a6b087b76694d766d.scn"]
 
 [params]
 
