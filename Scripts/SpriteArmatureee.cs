@@ -1,8 +1,9 @@
 using Godot;
 using System;
 
-public partial class SpriteArmature : Node3D
+public partial class SpriteArmatureee : Skeleton3D
 {
+    
     [Export]
     public PackedScene spriteMultimeshScene;
     [Export]
@@ -13,13 +14,9 @@ public partial class SpriteArmature : Node3D
     public int spriteSize = 32;
     [Export]
     public float spriteScale = 1f;
-    [Export]
-    public Node3D testObj;
 
     int headIdx = -1;
-    BoneAttachment3D headBone;
     MultiMeshInstance3D multimeshInstance;
-    Skeleton3D skeleton;
 
     public override void _Ready()
     {
@@ -34,23 +31,23 @@ public partial class SpriteArmature : Node3D
             return;
         }
 
+        // Setting up sprite multimesh
         var sceneInstance = spriteMultimeshScene.Instantiate();
             AddChild(sceneInstance);
         multimeshInstance = sceneInstance.GetNode<MultiMeshInstance3D>("MultiMeshInstance3D");
-            // multimeshInstance.TopLevel = true;
-        skeleton = this.GetNode<Skeleton3D>("Armature/Skeleton3D");
+            multimeshInstance.TopLevel = true;
         
-        var mat = multimeshInstance.Multimesh.Mesh.SurfaceGetMaterial(0).Duplicate() as Material;
+        var mat = this.multimeshInstance.Multimesh.Mesh.SurfaceGetMaterial(0).Duplicate() as Material;
 		if(mat is ShaderMaterial) {
 			var shader = mat as ShaderMaterial;
 			shader.SetShaderParameter("spritesheet", spritesheet);
 			shader.SetShaderParameter("num_perspectives", numPerspectives);
 			shader.SetShaderParameter("sprite_size", spriteSize);
 		}
-        multimeshInstance.Multimesh.Mesh.SurfaceSetMaterial(0, mat);
-        multimeshInstance.Multimesh.InstanceCount = 1;
+        this.multimeshInstance.Multimesh.Mesh.SurfaceSetMaterial(0, mat);
+        this.multimeshInstance.Multimesh.InstanceCount = 1;
 
-        var boneNames = skeleton.GetConcatenatedBoneNames().ToString().Split(',');
+        var boneNames = this.GetConcatenatedBoneNames().ToString().Split(',');
         int idx = 0;
         foreach(var boneName in boneNames) {
             if(boneName.EndsWith("Head")) {
@@ -65,28 +62,25 @@ public partial class SpriteArmature : Node3D
             this.QueueFree();
             return;
         }
-
-        //setting bone attachments
-        headBone = new BoneAttachment3D();
-        skeleton.AddChild(headBone);
-        headBone.BoneIdx = headIdx;
     }
 
     public override void _Process(double delta)
     {
-        var pos = multimeshInstance.ToLocal(headBone.GlobalPosition);
-        var euler = new Vector3(headBone.GlobalRotation.Z, headBone.GlobalRotation.Y, headBone.GlobalRotation.X);
-        var rot = Quaternion.FromEuler(euler);
-            rot *= new Basis(rot*Vector3.Up, Mathf.Pi).GetRotationQuaternion();
-        testObj.GlobalRotation = euler;
-        var transform = Transform3D.Identity
-            .Rotated(rot.GetAxis(), rot.GetAngle())
-            .Translated(pos);
-        transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(spriteScale, 2f);
-        transform.Basis.Column1 = transform.Basis.Column1.Normalized() * spriteScale;
-        transform.Basis.Column2 = transform.Basis.Column2.Normalized() * spriteScale;
+        LookAtFromPosition(Vector3.Zero, Vector3.Forward);
 
-        multimeshInstance.Multimesh.SetInstanceTransform(0, transform);
+        var headRelative = GetBoneGlobalPose(headIdx);
+        var headGlobal = this.GlobalTransform * headRelative;
+        var head_rot = headGlobal.Basis.GetRotationQuaternion();
+        var headTransformGlobal = Transform3D.Identity
+            .Translated(headRelative.Origin)
+            .RotatedLocal(Quaternion.GetAxis(), Quaternion.GetAngle())
+            .Scaled(new Vector3(spriteScale, spriteScale, spriteScale));
+        GD.Print(headGlobal.Origin);
+
+        multimeshInstance.Multimesh.SetInstanceTransform(0, headTransformGlobal);
+
+        multimeshInstance.Scale = Vector3.One;
     }
+
 
 }

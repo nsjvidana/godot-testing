@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqr88gf35xtc4"]
+
+[ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/sprite_multimesh_material.tres" id="1_by8hy"]
+[ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="2_egc3u"]
+[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/player_head.png" id="3_rmb6b"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_qjwnj"]
+material = ExtResource("1_by8hy")
+
+[sub_resource type="MultiMesh" id="MultiMesh_lauwy"]
+transform_format = 1
+mesh = SubResource("QuadMesh_qjwnj")
+
+[node name="SpriteMultimesh" type="Node3D"]
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_lauwy")
+script = ExtResource("2_egc3u")
+spritesheet = ExtResource("3_rmb6b")

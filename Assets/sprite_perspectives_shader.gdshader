@@ -68,7 +68,7 @@ void vertex() {
 	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -local_y);
 		//add extra perspective's angle since the spritesheet's perspectives
 		//dont loop back to the 0-degree perspective to conserve memory usage
-		rot_disp += TAU/float(num_perspectives)/2.0;
+		rot_disp += (TAU/float(num_perspectives)/2.0) * length(MODEL_MATRIX[1]);
 	//rot_2pi = rot_disp + TAU * float(rot_disp < 0.0);
 	float rot_2pi = fma(TAU, float(rot_disp < 0.0), rot_disp);
 	
@@ -89,6 +89,13 @@ void vertex() {
 			vec4(MODEL_MATRIX[1].xyz, 0.0),
 			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0),
 			MODEL_MATRIX[3]);
+
+	//keep scale of when billboarding
+	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(
+			vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
+			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
+			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
+			vec4(0.0, 0.0, 0.0, 1.0));
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 }
 

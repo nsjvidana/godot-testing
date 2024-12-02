@@ -13,22 +13,18 @@ public partial class MultiMeshTesting : MultiMeshInstance3D
 
 	public override void _Ready()
 	{
-		var mat = Multimesh.Mesh.SurfaceGetMaterial(0);
+		var mat = Multimesh.Mesh.SurfaceGetMaterial(0).Duplicate() as Material;
 		if(mat is ShaderMaterial) {
 			var shader = (mat as ShaderMaterial);
 			shader.SetShaderParameter("spritesheet", spritesheet);
 			shader.SetShaderParameter("num_perspectives", numPerspectives);
 			shader.SetShaderParameter("sprite_size", spriteSize);
 		}
-		Multimesh.InstanceCount = 100;
+		Multimesh.Mesh.SurfaceSetMaterial(0, mat);
+		Multimesh.InstanceCount = 1;
 		for(int i = 0; i < Multimesh.InstanceCount; i++) {
 			var transform = Transform3D.Identity.Translated(new Vector3(i*1.5f, 0f, 0f));
 			Multimesh.SetInstanceTransform(i, transform);
 		}
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 }

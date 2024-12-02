@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c8j14dmqjcl4c"]
+
+[ext_resource type="Shader" path="res://Assets/sprite_perspectives_shader.gdshader" id="1_xdu5n"]
+[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/player_head.png" id="2_e2ygc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xdu5n")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/num_perspectives = 16
+shader_parameter/sprite_size = 32
+shader_parameter/spritesheet = ExtResource("2_e2ygc")

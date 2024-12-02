@@ -1,11 +1,12 @@
-[gd_scene load_steps=36 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=37 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
-[ext_resource type="PackedScene" uid="uid://dlivj16euv5vh" path="res://Scenes/wave_animation.tscn" id="2_kpw08"]
+[ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/sprite_multimesh_material.tres" id="2_gvc5m"]
 [ext_resource type="Shader" path="res://Assets/sprite_perspectives_shader.gdshader" id="3_6gdjo"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
 [ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
+[ext_resource type="PackedScene" uid="uid://rogbkk0h3lxl" path="res://Scenes/player2.tscn" id="7_8bewh"]
 [ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/player_head.png" id="7_iyrev"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
@@ -20,25 +21,8 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 
 [sub_resource type="PrismMesh" id="PrismMesh_h1smq"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wukgq"]
-render_priority = 0
-shader = ExtResource("3_6gdjo")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/alpha_scissor_threshold = 0.5
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/num_perspectives = null
-shader_parameter/sprite_size = null
-
 [sub_resource type="QuadMesh" id="QuadMesh_sh4oi"]
-material = SubResource("ShaderMaterial_wukgq")
+material = ExtResource("2_gvc5m")
 
 [sub_resource type="MultiMesh" id="MultiMesh_r6jqf"]
 transform_format = 1
@@ -189,19 +173,21 @@ shader_parameter/spritesheet = ExtResource("7_iyrev")
 [sub_resource type="QuadMesh" id="QuadMesh_vf1a6"]
 material = SubResource("ShaderMaterial_p1duy")
 
+[sub_resource type="BoxMesh" id="BoxMesh_xfx1p"]
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2105, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52413, 0.240016, 0.660672)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)
 
-[node name="GroundCollision" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.259216, 0)
 shape = SubResource("BoxShape3D_oshsr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/GroundCollision"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/GroundCollision"]
 mesh = SubResource("BoxMesh_l6fbf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -220,23 +206,30 @@ mesh = SubResource("SphereMesh_v6h18")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45386, -1.03414e-05, 0.161709)
 mesh = SubResource("PrismMesh_h1smq")
 
-[node name="wave_animation" parent="." instance=ExtResource("2_kpw08")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.718124, 0, 0)
-
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.422422, 0)
+[node name="Pyramid" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94516, 0.422422, 0)
 multimesh = SubResource("MultiMesh_r6jqf")
 script = ExtResource("3_w6ty4")
 spritesheet = ExtResource("6_nbo12")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.616244, 0.201513, 0)
+[node name="PyramidSprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16874, 0.201513, 0)
 billboard = 1
 texture_filter = 0
 texture = SubResource("AtlasTexture_fkk3f")
 script = ExtResource("6_nlrss")
 perspectives = SubResource("SpriteFrames_kn6r1")
 
-[node name="Quad" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63352, 0.764313, 1.75359)
+[node name="CharacterHead" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
+
+[node name="Player2" parent="." node_paths=PackedStringArray("testObj") instance=ExtResource("7_8bewh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95778, 0, 0)
+spriteScale = 0.5
+testObj = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0.967169, 0.406657, 0)
+mesh = SubResource("BoxMesh_xfx1p")
+skeleton = NodePath("../..")

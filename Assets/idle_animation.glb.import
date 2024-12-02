@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bdgsrcsuj1xnr"
-path="res://.godot/imported/wave_animation.glb-86823abec915a9f108297b47868bf5a3.scn"
+uid="uid://lpk6tx64l0vm"
+path="res://.godot/imported/idle_animation.glb-77601fbd15be4e4087dfaeea659af5f7.scn"
 
 [deps]
 
-source_file="res://Assets/wave_animation.glb"
-dest_files=["res://.godot/imported/wave_animation.glb-86823abec915a9f108297b47868bf5a3.scn"]
+source_file="res://Assets/idle_animation.glb"
+dest_files=["res://.godot/imported/idle_animation.glb-77601fbd15be4e4087dfaeea659af5f7.scn"]
 
 [params]
 
