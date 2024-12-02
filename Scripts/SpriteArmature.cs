@@ -81,10 +81,11 @@ public partial class SpriteArmature : Node3D
         testObj.GlobalRotation = euler;
         var transform = Transform3D.Identity
             .Rotated(rot.GetAxis(), rot.GetAngle())
+            .Scaled(Vector3.One * spriteScale)
             .Translated(pos);
-        transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(spriteScale, 2f);
-        transform.Basis.Column1 = transform.Basis.Column1.Normalized() * spriteScale;
-        transform.Basis.Column2 = transform.Basis.Column2.Normalized() * spriteScale;
+        // transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(spriteScale, 2f);
+        // transform.Basis.Column1 = transform.Basis.Column1.Normalized() * spriteScale;
+        // transform.Basis.Column2 = transform.Basis.Column2.Normalized() * spriteScale;
 
         multimeshInstance.Multimesh.SetInstanceTransform(0, transform);
     }

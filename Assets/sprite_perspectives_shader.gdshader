@@ -68,7 +68,8 @@ void vertex() {
 	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -local_y);
 		//add extra perspective's angle since the spritesheet's perspectives
 		//dont loop back to the 0-degree perspective to conserve memory usage
-		rot_disp += (TAU/float(num_perspectives)/2.0) * length(MODEL_MATRIX[1]);
+		//rot_disp += (TAU/float(num_perspectives)/2.0) * length(MODEL_MATRIX[1]);
+		rot_disp += (TAU/float(num_perspectives)/2.0);
 	//rot_2pi = rot_disp + TAU * float(rot_disp < 0.0);
 	float rot_2pi = fma(TAU, float(rot_disp < 0.0), rot_disp);
 	
