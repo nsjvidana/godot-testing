@@ -56,8 +56,12 @@ mat3 axis_angle_mat3(vec3 axis, float angle) {
 }
 
 void vertex() {
-	vec3 local_y = MODEL_MATRIX[1].xyz;
-	vec3 dir_proj = -MODEL_MATRIX[2].xyz;
+	vec3 x_basis = normalize(MODEL_MATRIX[0].xyz);
+	vec3 y_basis = normalize(MODEL_MATRIX[1].xyz);
+	vec3 z_basis = normalize(MODEL_MATRIX[2].xyz);
+	
+	vec3 local_y = y_basis;
+	vec3 dir_proj = -z_basis;
 	
 	vec3 dir_to_cam = CAMERA_POSITION_WORLD - MODEL_MATRIX[3].xyz;
 	vec3 dir_to_cam_proj = project_on_plane(dir_to_cam, local_y);
@@ -79,16 +83,13 @@ void vertex() {
 	
 	//applying scale
 	vec3 scale = vec3(length(MODEL_MATRIX[0]), length(MODEL_MATRIX[1]), length(MODEL_MATRIX[2]));
-	vec3 right = normalize(MODEL_MATRIX[0].xyz);
-	vec3 up = normalize(MODEL_MATRIX[1].xyz);
-	vec3 fwd = normalize(MODEL_MATRIX[1].xyz);
 	VERTEX *= scale;
 	
 	//billboard along local y axis
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-			vec4(normalize(cross(up, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
-			vec4(up, 0.0),
-			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, up)), 0.0),
+			vec4(normalize(cross(y_basis, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+			vec4(y_basis, 0.0),
+			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, y_basis)), 0.0),
 			MODEL_MATRIX[3]);
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 }
@@ -98,7 +99,8 @@ void fragment() {
 	
 	float uv_y = uv_offset_y + UV.y / float(num_perspectives);
 	float uv_x = uv_offset_x + UV.x / float(num_parts);
-	vec4 sprite_tex = texture(spritesheet, vec2(uv_x, uv_y));
+	vec2 uv = uv_offset + vec2(UV.x / float(num_parts), UV.y / float(num_perspectives));
+	vec4 sprite_tex = texture(spritesheet, uv);
 	ALBEDO.rgb = albedo.rgb * sprite_tex.rgb;
 
 	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);

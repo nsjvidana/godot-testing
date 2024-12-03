@@ -112,9 +112,6 @@ public partial class SpriteArmature : Node3D
             new Basis(right, up, fwd).Scaled(new Vector3(scale, scale, scale)),
             pos
         );
-        // transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(scale, 2f);
-        // transform.Basis.Column1 = transform.Basis.Column1.Normalized() * scale;
-        // transform.Basis.Column2 = transform.Basis.Column2.Normalized() * scale;
         return transform;
     }
 
