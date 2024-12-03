@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c8j14dmqjcl4c"]
 
-[ext_resource type="Shader" path="res://Assets/sprite_perspectives_shader.gdshader" id="1_xdu5n"]
-[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/player_head.png" id="2_e2ygc"]
+[ext_resource type="Shader" path="res://Assets/Materials/sprite_perspectives_shader.gdshader" id="1_xdu5n"]
+[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/Sprites/player_head.png" id="2_e2ygc"]
 
 [resource]
 render_priority = 0

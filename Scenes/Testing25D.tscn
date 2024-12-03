@@ -1,9 +1,9 @@
 [gd_scene load_steps=34 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
-[ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/sprite_multimesh_material.tres" id="2_gvc5m"]
+[ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
-[ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/pyramid.png" id="6_nbo12"]
+[ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/Sprites/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
 [ext_resource type="PackedScene" uid="uid://rogbkk0h3lxl" path="res://Scenes/player2.tscn" id="7_8bewh"]
 

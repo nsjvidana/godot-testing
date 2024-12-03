@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da651jqtufn56"
-path.s3tc="res://.godot/imported/scarecrow-8-dir.png-2c5f852481ae61b2107cdf0761e27622.s3tc.ctex"
+uid="uid://c51bghaybyskp"
+path.s3tc="res://.godot/imported/player_head.png-7c436a0d475b4adf349734abf368bb42.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/scarecrow-8-dir.png"
-dest_files=["res://.godot/imported/scarecrow-8-dir.png-2c5f852481ae61b2107cdf0761e27622.s3tc.ctex"]
+source_file="res://Assets/Sprites/player_head.png"
+dest_files=["res://.godot/imported/player_head.png-7c436a0d475b4adf349734abf368bb42.s3tc.ctex"]
 
 [params]
 

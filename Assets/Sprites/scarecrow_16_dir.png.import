@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cirjmrr5p7uhu"
-path.s3tc="res://.godot/imported/pyramid.png-4d3c25e577648dd488ad46eb2ceb1076.s3tc.ctex"
+uid="uid://cfue3dpuu6v6x"
+path.s3tc="res://.godot/imported/scarecrow_16_dir.png-2af175a93d229ee4de6316f083d7b957.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/pyramid.png"
-dest_files=["res://.godot/imported/pyramid.png-4d3c25e577648dd488ad46eb2ceb1076.s3tc.ctex"]
+source_file="res://Assets/Sprites/scarecrow_16_dir.png"
+dest_files=["res://.godot/imported/scarecrow_16_dir.png-2af175a93d229ee4de6316f083d7b957.s3tc.ctex"]
 
 [params]
 

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/SpriteArmature.cs" id="2_lj46v"]
 [ext_resource type="PackedScene" uid="uid://cqr88gf35xtc4" path="res://Scenes/sprite_multimesh.tscn" id="3_tvfns"]
 [ext_resource type="Script" path="res://Scripts/PlayTestAnimation.cs" id="3_vd4hq"]
-[ext_resource type="Texture2D" uid="uid://13c64s30towl" path="res://Assets/player_spritesheet.png" id="4_1xf57"]
+[ext_resource type="Texture2D" uid="uid://13c64s30towl" path="res://Assets/Sprites/player_spritesheet.png" id="4_1xf57"]
 
 [sub_resource type="Animation" id="Animation_j7ckx"]
 resource_name = "Idle"
