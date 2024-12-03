@@ -205,10 +205,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("testObj") instance=ExtResource("7_8bewh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95778, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53028, 0, 0)
 testObj = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
-transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0.967169, 0.406657, 0)
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, -0.990611, 0.406657, 0)
 mesh = SubResource("BoxMesh_xfx1p")
 skeleton = NodePath("../..")
