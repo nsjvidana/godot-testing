@@ -60,9 +60,9 @@ public partial class SpriteArmature : Node3D
         int boneCount = skeleton.GetBoneCount();
         for(int i = 0; i < boneCount; i++) {
             var boneName = skeleton.GetBoneName(i);
-            if(boneName.EndsWith("Head"))
+            if(headIdx == -1 && boneName.StartsWith("Head"))
                 headIdx = idx;
-            else if(boneName.EndsWith("Spine1"))
+            else if(torsoIdx == -1 && boneName.StartsWith("Spine"))
                 torsoIdx = idx;
             idx++;
         }

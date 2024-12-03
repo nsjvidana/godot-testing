@@ -14,5 +14,5 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
 shader_parameter/num_perspectives = 16
-shader_parameter/num_parts = null
+shader_parameter/num_parts = 2
 shader_parameter/spritesheet = ExtResource("2_7fmlb")

@@ -3,9 +3,9 @@
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
+[ext_resource type="PackedScene" uid="uid://bbjskgsgh8pfc" path="res://Scenes/character_armature.tscn" id="6_ccf45"]
 [ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/Sprites/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
-[ext_resource type="PackedScene" uid="uid://rogbkk0h3lxl" path="res://Scenes/player2.tscn" id="7_8bewh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -153,12 +153,12 @@ animations = [{
 [sub_resource type="QuadMesh" id="QuadMesh_vf1a6"]
 material = ExtResource("2_gvc5m")
 
-[sub_resource type="BoxMesh" id="BoxMesh_xfx1p"]
+[sub_resource type="BoxMesh" id="BoxMesh_am4rm"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.52413, 0.240016, -0.571718)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.52413, 0.240016, -1.25523)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)
@@ -204,11 +204,9 @@ perspectives = SubResource("SpriteFrames_kn6r1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
 
-[node name="Player2" parent="." node_paths=PackedStringArray("testObj") instance=ExtResource("7_8bewh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.53028, 0, 0)
-testObj = NodePath("MeshInstance3D")
+[node name="CharacterArmature" parent="." instance=ExtResource("6_ccf45")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25322, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
-transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, -0.990611, 0.406657, 0)
-mesh = SubResource("BoxMesh_xfx1p")
-skeleton = NodePath("../..")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterArmature"]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0, 0, 0)
+mesh = SubResource("BoxMesh_am4rm")

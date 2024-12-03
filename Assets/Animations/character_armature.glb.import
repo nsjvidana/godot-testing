@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://lpk6tx64l0vm"
-path="res://.godot/imported/idle_animation.glb-ee937e4e5817829a6b087b76694d766d.scn"
+uid="uid://c5i2e7ugstx5i"
+path="res://.godot/imported/character_armature.glb-276f1c1c43ef559da283bdbee46960ab.scn"
 
 [deps]
 
-source_file="res://Assets/Animations/idle_animation.glb"
-dest_files=["res://.godot/imported/idle_animation.glb-ee937e4e5817829a6b087b76694d766d.scn"]
+source_file="res://Assets/Animations/character_armature.glb"
+dest_files=["res://.godot/imported/character_armature.glb-276f1c1c43ef559da283bdbee46960ab.scn"]
 
 [params]
 
