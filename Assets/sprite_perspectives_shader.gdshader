@@ -14,16 +14,13 @@ uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, re
 uniform float specular : hint_range(0.0, 1.0, 0.01);
 uniform float metallic : hint_range(0.0, 1.0, 0.01);
 
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
 uniform sampler2D spritesheet: filter_nearest;
 uniform int num_perspectives;
-uniform int sprite_size;
+uniform int num_parts;
 
 varying float uv_offset_y;
+varying float uv_offset_x;
+varying vec2 uv_offset;
 
 vec3 project_on_plane(vec3 to_proj, vec3 plane_normal) {
 	float d = dot(to_proj, plane_normal);
@@ -77,12 +74,12 @@ void vertex() {
 	float index = mod(floor(t * float(num_perspectives)), float(num_perspectives));
 	uv_offset_y = index / float(num_perspectives);
 	
+	uv_offset_x = float(INSTANCE_ID) / float(num_parts);
+	uv_offset = vec2(uv_offset_x, uv_offset_y);
+	
 	//todo: calculate UV y coord offset for full sprite armature
 	//	(might wanna make uv_offset_y into a single vec2)
 	
-	vec3 axis = cross(vec3(0,1,0), local_y);
-	float angle = signed_angle_to(vec3(0,1,0), local_y, axis);
-	mat3 billboard_rot = axis_angle_mat3(axis, angle);
 	
 	//billboard along local y axis
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
@@ -102,9 +99,10 @@ void vertex() {
 
 void fragment() {
 	vec2 base_uv = UV;
-
+	
 	float uv_y = uv_offset_y + UV.y / float(num_perspectives);
-	vec4 sprite_tex = texture(spritesheet, vec2(UV.x, uv_y));
+	float uv_x = uv_offset_x + UV.x / float(num_parts);
+	vec4 sprite_tex = texture(spritesheet, vec2(uv_x, uv_y));
 	ALBEDO.rgb = albedo.rgb * sprite_tex.rgb;
 
 	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);

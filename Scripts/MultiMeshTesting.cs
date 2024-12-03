@@ -8,8 +8,6 @@ public partial class MultiMeshTesting : MultiMeshInstance3D
 	public Texture2D spritesheet;
 	[Export]
 	public int numPerspectives = 16;
-	[Export]
-	public int spriteSize = 32;
 
 	public override void _Ready()
 	{
@@ -18,7 +16,6 @@ public partial class MultiMeshTesting : MultiMeshInstance3D
 			var shader = (mat as ShaderMaterial);
 			shader.SetShaderParameter("spritesheet", spritesheet);
 			shader.SetShaderParameter("num_perspectives", numPerspectives);
-			shader.SetShaderParameter("sprite_size", spriteSize);
 		}
 		Multimesh.Mesh.SurfaceSetMaterial(0, mat);
 		Multimesh.InstanceCount = 1;

@@ -11,8 +11,6 @@ public partial class SpriteArmatureee : Skeleton3D
     [Export]
     public int numPerspectives = 16;
     [Export]
-    public int spriteSize = 32;
-    [Export]
     public float spriteScale = 1f;
 
     int headIdx = -1;
@@ -42,7 +40,6 @@ public partial class SpriteArmatureee : Skeleton3D
 			var shader = mat as ShaderMaterial;
 			shader.SetShaderParameter("spritesheet", spritesheet);
 			shader.SetShaderParameter("num_perspectives", numPerspectives);
-			shader.SetShaderParameter("sprite_size", spriteSize);
 		}
         this.multimeshInstance.Multimesh.Mesh.SurfaceSetMaterial(0, mat);
         this.multimeshInstance.Multimesh.InstanceCount = 1;

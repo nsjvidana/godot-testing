@@ -1,13 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=34 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/sprite_multimesh_material.tres" id="2_gvc5m"]
-[ext_resource type="Shader" path="res://Assets/sprite_perspectives_shader.gdshader" id="3_6gdjo"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
 [ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
 [ext_resource type="PackedScene" uid="uid://rogbkk0h3lxl" path="res://Scenes/player2.tscn" id="7_8bewh"]
-[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/player_head.png" id="7_iyrev"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -152,33 +150,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_p1duy"]
-render_priority = 0
-shader = ExtResource("3_6gdjo")
-shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/alpha_scissor_threshold = 0.115
-shader_parameter/point_size = null
-shader_parameter/roughness = null
-shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = 0.0
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_scale = null
-shader_parameter/uv1_offset = null
-shader_parameter/uv2_scale = null
-shader_parameter/uv2_offset = null
-shader_parameter/num_perspectives = 16
-shader_parameter/sprite_size = 32
-shader_parameter/spritesheet = ExtResource("7_iyrev")
-
 [sub_resource type="QuadMesh" id="QuadMesh_vf1a6"]
-material = SubResource("ShaderMaterial_p1duy")
+material = ExtResource("2_gvc5m")
 
 [sub_resource type="BoxMesh" id="BoxMesh_xfx1p"]
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52413, 0.240016, 0.660672)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.52413, 0.240016, -0.571718)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)
@@ -226,7 +206,6 @@ mesh = SubResource("QuadMesh_vf1a6")
 
 [node name="Player2" parent="." node_paths=PackedStringArray("testObj") instance=ExtResource("7_8bewh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.95778, 0, 0)
-spriteScale = 0.5
 testObj = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player2"]
