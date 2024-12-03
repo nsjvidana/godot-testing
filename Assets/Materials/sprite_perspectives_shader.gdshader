@@ -77,23 +77,19 @@ void vertex() {
 	uv_offset_x = float(INSTANCE_ID) / float(num_parts);
 	uv_offset = vec2(uv_offset_x, uv_offset_y);
 	
-	//todo: calculate UV y coord offset for full sprite armature
-	//	(might wanna make uv_offset_y into a single vec2)
-	
+	//applying scale
+	vec3 scale = vec3(length(MODEL_MATRIX[0]), length(MODEL_MATRIX[1]), length(MODEL_MATRIX[2]));
+	vec3 right = normalize(MODEL_MATRIX[0].xyz);
+	vec3 up = normalize(MODEL_MATRIX[1].xyz);
+	vec3 fwd = normalize(MODEL_MATRIX[1].xyz);
+	VERTEX *= scale;
 	
 	//billboard along local y axis
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-			vec4(normalize(cross(MODEL_MATRIX[1].xyz, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
-			vec4(MODEL_MATRIX[1].xyz, 0.0),
-			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, MODEL_MATRIX[1].xyz)), 0.0),
+			vec4(normalize(cross(up, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+			vec4(up, 0.0),
+			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, up)), 0.0),
 			MODEL_MATRIX[3]);
-
-	//keep scale of when billboarding
-	MODELVIEW_MATRIX = MODELVIEW_MATRIX * mat4(
-			vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0),
-			vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0),
-			vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0),
-			vec4(0.0, 0.0, 0.0, 1.0));
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 }
 

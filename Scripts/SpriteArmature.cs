@@ -108,14 +108,13 @@ public partial class SpriteArmature : Node3D
         var up = (boneTail.GlobalPosition - boneHead.GlobalPosition).Normalized();
         var right = up.Cross(rot * Vector3.Forward);
         var fwd = right.Cross(up);
-        var final_rot = new Basis(right, up, fwd);
         var transform = new Transform3D(
-            final_rot,
+            new Basis(right, up, fwd).Scaled(new Vector3(scale, scale, scale)),
             pos
         );
-        transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(scale, 2f);
-        transform.Basis.Column1 = transform.Basis.Column1.Normalized() * scale;
-        transform.Basis.Column2 = transform.Basis.Column2.Normalized() * scale;
+        // transform.Basis.Column0 = transform.Basis.Column0.Normalized() * Mathf.Pow(scale, 2f);
+        // transform.Basis.Column1 = transform.Basis.Column1.Normalized() * scale;
+        // transform.Basis.Column2 = transform.Basis.Column2.Normalized() * scale;
         return transform;
     }
 

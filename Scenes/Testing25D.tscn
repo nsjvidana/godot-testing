@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
-[ext_resource type="PackedScene" uid="uid://bbjskgsgh8pfc" path="res://Scenes/character_armature.tscn" id="6_ccf45"]
+[ext_resource type="PackedScene" uid="uid://nksvj23diwrq" path="res://Scenes/character_armature.tscn" id="6_ccf45"]
 [ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/Sprites/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
 
@@ -205,8 +205,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
 
 [node name="CharacterArmature" parent="." instance=ExtResource("6_ccf45")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25322, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55897, 0, 0)
+headScale = 0.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterArmature"]
-transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0, 0, 0)
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0.305752, 0, 0)
 mesh = SubResource("BoxMesh_am4rm")
+skeleton = NodePath("")

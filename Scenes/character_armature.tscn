@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bbjskgsgh8pfc"]
+[gd_scene load_steps=10 format=3 uid="uid://nksvj23diwrq"]
 
 [ext_resource type="PackedScene" uid="uid://c5i2e7ugstx5i" path="res://Assets/Animations/character_armature.glb" id="1_gdxa3"]
 [ext_resource type="Script" path="res://Scripts/SpriteArmature.cs" id="2_e6lgf"]
