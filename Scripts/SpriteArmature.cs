@@ -95,12 +95,14 @@ public partial class SpriteArmature : Node3D
 
     public override void _Process(double delta)
     {
-        multimeshInstance.Multimesh.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, headScale));
+        multimeshInstance.Multimesh.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, headScale).Translated(new Vector3(0, 0, -0.01f)));
         multimeshInstance.Multimesh.SetInstanceTransform(1, CalculateSpriteTransform(spineBoneHead, spineBoneTail, torsoScale));
+        GD.Print(multimeshInstance.Multimesh.GetInstanceTransform(0).Origin);
+        GD.Print(multimeshInstance.Multimesh.GetInstanceTransform(1).Origin);
     }
 
     Transform3D CalculateSpriteTransform(BoneAttachment3D boneHead, BoneAttachment3D boneTail, float scale) {
-        var pos = multimeshInstance.ToLocal(boneTail.GlobalPosition);
+        var pos = multimeshInstance.ToLocal((boneHead.GlobalPosition + boneTail.GlobalPosition)/2);
         var euler = new Vector3(boneTail.GlobalRotation.Z, boneTail.GlobalRotation.Y, boneTail.GlobalRotation.X);
         var rot = Quaternion.FromEuler(euler);
         var up = (boneTail.GlobalPosition - boneHead.GlobalPosition).Normalized();

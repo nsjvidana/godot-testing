@@ -366,6 +366,8 @@ _data = {
 script = ExtResource("2_e6lgf")
 spriteMultimeshScene = ExtResource("3_pnhxe")
 spritesheet = ExtResource("4_87fyn")
+headScale = 0.7
+torsoScale = 0.8
 
 [node name="Armature" parent="." index="0"]
 transform = Transform3D(-1.2572, 0, -1.09908e-07, 0, 1.2572, 0, 1.09908e-07, 0, -1.2572, 0, 0.998149, 0)
