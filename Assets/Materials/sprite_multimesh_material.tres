@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c8j14dmqjcl4c"]
 
 [ext_resource type="Shader" path="res://Assets/Materials/sprite_perspectives_shader.gdshader" id="1_ga4xt"]
-[ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/Sprites/player_head.png" id="2_7fmlb"]
+[ext_resource type="Texture2D" uid="uid://d1wsa20scn36f" path="res://Assets/Sprites/player_spritesheet.png" id="2_abynh"]
 
 [resource]
 render_priority = 0
@@ -13,6 +13,5 @@ shader_parameter/roughness = 1.0
 shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.5
 shader_parameter/metallic = 0.0
-shader_parameter/num_perspectives = 16
-shader_parameter/num_parts = 2
-shader_parameter/spritesheet = ExtResource("2_7fmlb")
+shader_parameter/sprite_size = 16
+shader_parameter/spritesheet = ExtResource("2_abynh")

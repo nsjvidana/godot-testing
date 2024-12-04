@@ -206,9 +206,10 @@ mesh = SubResource("QuadMesh_vf1a6")
 
 [node name="CharacterArmature" parent="." instance=ExtResource("6_ccf45")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55897, 0, 0)
-headScale = 0.5
+headScale = 1.225
+torsoScale = 1.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterArmature"]
-transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0.305752, 0, 0)
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0, 0, 0)
 mesh = SubResource("BoxMesh_am4rm")
 skeleton = NodePath("")

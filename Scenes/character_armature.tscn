@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c5i2e7ugstx5i" path="res://Assets/Animations/character_armature.glb" id="1_gdxa3"]
 [ext_resource type="Script" path="res://Scripts/SpriteArmature.cs" id="2_e6lgf"]
 [ext_resource type="PackedScene" uid="uid://cqr88gf35xtc4" path="res://Scenes/sprite_multimesh.tscn" id="3_pnhxe"]
-[ext_resource type="Texture2D" uid="uid://13c64s30towl" path="res://Assets/Sprites/player_spritesheet.png" id="4_87fyn"]
+[ext_resource type="Texture2D" uid="uid://d1wsa20scn36f" path="res://Assets/Sprites/player_spritesheet.png" id="4_87fyn"]
 [ext_resource type="Script" path="res://Scripts/PlayTestAnimation.cs" id="4_ymu5e"]
 
 [sub_resource type="Animation" id="Animation_llyfl"]

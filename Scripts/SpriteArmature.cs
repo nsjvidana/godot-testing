@@ -8,9 +8,7 @@ public partial class SpriteArmature : Node3D
     [Export]
     public Texture2D spritesheet;
     [Export]
-    public int numPerspectives = 16;
-    [Export]
-    public int numParts = 2;
+    public int spriteSize = 16;
     [Export]
     public float headScale = 1f;
     [Export]
@@ -48,11 +46,10 @@ public partial class SpriteArmature : Node3D
 		if(mat is ShaderMaterial) {
 			var shader = mat as ShaderMaterial;
 			shader.SetShaderParameter("spritesheet", spritesheet);
-			shader.SetShaderParameter("num_perspectives", numPerspectives);
-			shader.SetShaderParameter("num_parts", numParts);
+			shader.SetShaderParameter("sprite_size", spriteSize);
 		}
         multimeshInstance.Multimesh.Mesh.SurfaceSetMaterial(0, mat);
-        multimeshInstance.Multimesh.InstanceCount = 2;
+        multimeshInstance.Multimesh.InstanceCount = 3;
 
         int idx = 0;
         int headIdx = -1;
@@ -97,17 +94,19 @@ public partial class SpriteArmature : Node3D
     {
         multimeshInstance.Multimesh.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, headScale).Translated(new Vector3(0, 0, -0.01f)));
         multimeshInstance.Multimesh.SetInstanceTransform(1, CalculateSpriteTransform(spineBoneHead, spineBoneTail, torsoScale));
-        GD.Print(multimeshInstance.Multimesh.GetInstanceTransform(0).Origin);
-        GD.Print(multimeshInstance.Multimesh.GetInstanceTransform(1).Origin);
     }
 
     Transform3D CalculateSpriteTransform(BoneAttachment3D boneHead, BoneAttachment3D boneTail, float scale) {
+        var boneDir = boneTail.GlobalPosition - boneHead.GlobalPosition;
+
         var pos = multimeshInstance.ToLocal((boneHead.GlobalPosition + boneTail.GlobalPosition)/2);
         var euler = new Vector3(boneTail.GlobalRotation.Z, boneTail.GlobalRotation.Y, boneTail.GlobalRotation.X);
         var rot = Quaternion.FromEuler(euler);
-        var up = (boneTail.GlobalPosition - boneHead.GlobalPosition).Normalized();
+        var up = boneDir.Normalized();
         var right = up.Cross(rot * Vector3.Forward);
         var fwd = right.Cross(up);
+        
+        scale = boneDir.Length()*1.2f;
         var transform = new Transform3D(
             new Basis(right, up, fwd).Scaled(new Vector3(scale, scale, scale)),
             pos

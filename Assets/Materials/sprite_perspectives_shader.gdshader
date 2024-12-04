@@ -15,12 +15,13 @@ uniform float specular : hint_range(0.0, 1.0, 0.01);
 uniform float metallic : hint_range(0.0, 1.0, 0.01);
 
 uniform sampler2D spritesheet: filter_nearest;
-uniform int num_perspectives;
-uniform int num_parts;
+uniform int sprite_size;
 
 varying float uv_offset_y;
 varying float uv_offset_x;
 varying vec2 uv_offset;
+varying flat int num_parts;
+varying flat int num_perspectives;
 
 vec3 project_on_plane(vec3 to_proj, vec3 plane_normal) {
 	float d = dot(to_proj, plane_normal);
@@ -59,6 +60,10 @@ void vertex() {
 	vec3 x_basis = normalize(MODEL_MATRIX[0].xyz);
 	vec3 y_basis = normalize(MODEL_MATRIX[1].xyz);
 	vec3 z_basis = normalize(MODEL_MATRIX[2].xyz);
+	
+	ivec2 tex_size = textureSize(spritesheet, 0);
+	num_parts = tex_size.x / sprite_size;
+	num_perspectives = tex_size.y / sprite_size;
 	
 	vec3 local_y = y_basis;
 	vec3 dir_proj = -z_basis;
