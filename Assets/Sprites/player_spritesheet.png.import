@@ -3,23 +3,22 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1wsa20scn36f"
-path.s3tc="res://.godot/imported/player_spritesheet.png-d0115578e7ae58b40e2a5974fb4874a6.s3tc.ctex"
+path="res://.godot/imported/player_spritesheet.png-d0115578e7ae58b40e2a5974fb4874a6.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/Sprites/player_spritesheet.png"
-dest_files=["res://.godot/imported/player_spritesheet.png-d0115578e7ae58b40e2a5974fb4874a6.s3tc.ctex"]
+dest_files=["res://.godot/imported/player_spritesheet.png-d0115578e7ae58b40e2a5974fb4874a6.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
-compress/hdr_compression=1
+compress/hdr_compression=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=true
