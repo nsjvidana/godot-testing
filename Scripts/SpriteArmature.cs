@@ -11,10 +11,6 @@ public partial class SpriteArmature : Node3D
     [Export]
     public int spriteSize = 16;
     [Export]
-    public float headScale = 1f;
-    [Export]
-    public float torsoScale = 1f;
-    [Export]
     public Node3D testObj;
 
     BoneAttachment3D headBoneHead = new();
@@ -146,9 +142,9 @@ public partial class SpriteArmature : Node3D
 
     public override void _Process(double delta)
     {
-        multimeshInstance.Multimesh.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, headScale).Translated(new Vector3(0, 0, -0.01f)));
+        multimeshInstance.Multimesh.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, 0).Translated(new Vector3(0, 0, -0.01f)));
             multimeshInstance.Multimesh.SetInstanceCustomData(0, new Color(0,0,0));
-        multimeshInstance.Multimesh.SetInstanceTransform(1, CalculateSpriteTransform(spineBoneHead, spineBoneTail, torsoScale));
+        multimeshInstance.Multimesh.SetInstanceTransform(1, CalculateSpriteTransform(spineBoneHead, spineBoneTail, 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(1, new Color(1,0,0));
 
         multimeshInstance.Multimesh.SetInstanceTransform(2, CalculateSpriteTransform(upperLegBoneHeads[0], upperLegBoneTails[0], 0));
