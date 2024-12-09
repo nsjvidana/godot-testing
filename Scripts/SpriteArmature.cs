@@ -17,10 +17,16 @@ public partial class SpriteArmature : Node3D
     BoneAttachment3D headBoneTail = new();
     BoneAttachment3D spineBoneHead = new();
     BoneAttachment3D spineBoneTail = new();
+    
     BoneAttachment3D[] upperLegBoneHeads = {new(), new()};
     BoneAttachment3D[] upperLegBoneTails = {new(), new()};
     BoneAttachment3D[] lowerLegBoneHeads = {new(), new()};
     BoneAttachment3D[] lowerLegBoneTails = {new(), new()};
+
+    BoneAttachment3D[] upperArmBoneHeads = {new(), new()};
+    BoneAttachment3D[] upperArmBoneTails = {new(), new()};
+    BoneAttachment3D[] lowerArmBoneHeads = {new(), new()};
+    BoneAttachment3D[] lowerArmBoneTails = {new(), new()};
     MultiMeshInstance3D multimeshInstance;
     Skeleton3D skeleton;
 
@@ -50,13 +56,15 @@ public partial class SpriteArmature : Node3D
 			shader.SetShaderParameter("sprite_size", spriteSize);
 		}
         multimeshInstance.Multimesh.Mesh.SurfaceSetMaterial(0, mat);
-        multimeshInstance.Multimesh.InstanceCount = 6;
+        multimeshInstance.Multimesh.InstanceCount = 10;
 
         int idx = 0;
         int headIdx = -1;
         int torsoIdx = -1;
         int[] upperLegIdxs = {-1, -1};
         int[] lowerLegIdxs = {-1, -1};
+        int[] upperArmIdxs = {-1, -1};
+        int[] lowerArmIdxs = {-1, -1};
         int boneCount = skeleton.GetBoneCount();
         for(int i = 0; i < boneCount; i++) {
             var boneName = skeleton.GetBoneName(i);
@@ -72,6 +80,14 @@ public partial class SpriteArmature : Node3D
                 lowerLegIdxs[0] = idx;
             else if(lowerLegIdxs[1] == -1 && boneName.Equals("LowerLeg.R"))
                 lowerLegIdxs[1] = idx;
+            else if(upperArmIdxs[0] == -1 && boneName.Equals("UpperArm.L"))
+                upperArmIdxs[0] = idx;
+            else if(upperArmIdxs[1] == -1 && boneName.Equals("UpperArm.R"))
+                upperArmIdxs[1] = idx;
+            else if(lowerArmIdxs[0] == -1 && boneName.Equals("LowerArm.L"))
+                lowerArmIdxs[0] = idx;
+            else if(lowerArmIdxs[1] == -1 && boneName.Equals("LowerArm.R"))
+                lowerArmIdxs[1] = idx;
             idx++;
         }
         
@@ -106,6 +122,26 @@ public partial class SpriteArmature : Node3D
             this.QueueFree();
             return;
         }
+        if(upperArmIdxs[0] == -1) {
+            GD.PrintErr("Couldn't find UpperArm.L of skeleton node " + this.Name);
+            this.QueueFree();
+            return;
+        }
+        if(upperArmIdxs[1] == -1) {
+            GD.PrintErr("Couldn't find UpperArm.R of skeleton node " + this.Name);
+            this.QueueFree();
+            return;
+        }
+        if(lowerArmIdxs[0] == -1) {
+            GD.PrintErr("Couldn't find LowerArm.L of skeleton node " + this.Name);
+            this.QueueFree();
+            return;
+        }
+        if(lowerArmIdxs[1] == -1) {
+            GD.PrintErr("Couldn't find LowerArm.R of skeleton node " + this.Name);
+            this.QueueFree();
+            return;
+        }
         #endregion
 
         #region setting bone attachments
@@ -137,6 +173,25 @@ public partial class SpriteArmature : Node3D
         skeleton.AddChild(lowerLegBoneTails[1]);
             lowerLegBoneHeads[1].BoneIdx = lowerLegIdxs[1];
             lowerLegBoneTails[1].BoneIdx = lowerLegIdxs[1]+1;
+
+        //upper Arms
+        skeleton.AddChild(upperArmBoneHeads[0]);
+        skeleton.AddChild(upperArmBoneTails[0]);
+            upperArmBoneHeads[0].BoneIdx = upperArmIdxs[0];
+            upperArmBoneTails[0].BoneIdx = upperArmIdxs[0]+1;
+        skeleton.AddChild(upperArmBoneHeads[1]);
+        skeleton.AddChild(upperArmBoneTails[1]);
+            upperArmBoneHeads[1].BoneIdx = upperArmIdxs[1];
+            upperArmBoneTails[1].BoneIdx = upperArmIdxs[1]+1;
+        //lower Arms
+        skeleton.AddChild(lowerArmBoneHeads[0]);
+        skeleton.AddChild(lowerArmBoneTails[0]);
+            lowerArmBoneHeads[0].BoneIdx = lowerArmIdxs[0];
+            lowerArmBoneTails[0].BoneIdx = lowerArmIdxs[0]+1;
+        skeleton.AddChild(lowerArmBoneHeads[1]);
+        skeleton.AddChild(lowerArmBoneTails[1]);
+            lowerArmBoneHeads[1].BoneIdx = lowerArmIdxs[1];
+            lowerArmBoneTails[1].BoneIdx = lowerArmIdxs[1]+1;
         #endregion
     }
 
@@ -147,6 +202,7 @@ public partial class SpriteArmature : Node3D
         multimeshInstance.Multimesh.SetInstanceTransform(1, CalculateSpriteTransform(spineBoneHead, spineBoneTail, 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(1, new Color(1,0,0));
 
+        //legs
         multimeshInstance.Multimesh.SetInstanceTransform(2, CalculateSpriteTransform(upperLegBoneHeads[0], upperLegBoneTails[0], 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(2, new Color(2,0,0));
         multimeshInstance.Multimesh.SetInstanceTransform(3, CalculateSpriteTransform(upperLegBoneHeads[1], upperLegBoneTails[1], 0));
@@ -154,9 +210,19 @@ public partial class SpriteArmature : Node3D
 
         multimeshInstance.Multimesh.SetInstanceTransform(4, CalculateSpriteTransform(lowerLegBoneHeads[0], lowerLegBoneTails[0], 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(4, new Color(3,0,0));
-            testObj.GlobalPosition = lowerLegBoneTails[0].GlobalPosition;
         multimeshInstance.Multimesh.SetInstanceTransform(5, CalculateSpriteTransform(lowerLegBoneHeads[1], lowerLegBoneTails[1], 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(5, new Color(3,0,0));
+
+        //arms
+        multimeshInstance.Multimesh.SetInstanceTransform(6, CalculateSpriteTransform(upperArmBoneHeads[0], upperArmBoneTails[0], 0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(6, new Color(2,0,0));
+        multimeshInstance.Multimesh.SetInstanceTransform(7, CalculateSpriteTransform(upperArmBoneHeads[1], upperArmBoneTails[1], 0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(7, new Color(2,0,0));
+
+        multimeshInstance.Multimesh.SetInstanceTransform(8, CalculateSpriteTransform(lowerArmBoneHeads[0], lowerArmBoneTails[0], 0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(8, new Color(3,0,0));
+        multimeshInstance.Multimesh.SetInstanceTransform(9, CalculateSpriteTransform(lowerArmBoneHeads[1], lowerArmBoneTails[1], 0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(9, new Color(3,0,0));
     }
 
     Transform3D CalculateSpriteTransform(BoneAttachment3D boneHead, BoneAttachment3D boneTail, float scale) {

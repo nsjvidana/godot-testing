@@ -43,12 +43,12 @@ float round_to_precision(float value, float precision) {
 mat3 axis_angle_mat3(vec3 axis, float angle) {
 	float c = cos(angle);
 	float s = sin(angle);
-	
+
 	float t = 1.0 - c;
     float x = axis.x;
     float y = axis.y;
     float z = axis.z;
-	
+
 	return mat3(
         vec3(t * x * x + c,      t * x * y - s * z,  t * x * z + s * y),
         vec3(t * x * y + s * z,  t * y * y + c,      t * y * z - s * x),
@@ -60,17 +60,17 @@ void vertex() {
 	vec3 x_basis = normalize(MODEL_MATRIX[0].xyz);
 	vec3 y_basis = normalize(MODEL_MATRIX[1].xyz);
 	vec3 z_basis = normalize(MODEL_MATRIX[2].xyz);
-	
+
 	ivec2 tex_size = textureSize(spritesheet, 0);
 	num_parts = tex_size.x / sprite_size;
 	num_perspectives = tex_size.y / sprite_size;
-	
+
 	vec3 local_y = y_basis;
 	vec3 dir_proj = -z_basis;
-	
+
 	vec3 dir_to_cam = CAMERA_POSITION_WORLD - MODEL_MATRIX[3].xyz;
 	vec3 dir_to_cam_proj = project_on_plane(dir_to_cam, local_y);
-	
+
 	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -local_y);
 		//add extra perspective's angle since the spritesheet's perspectives
 		//dont loop back to the 0-degree perspective to conserve memory usage
@@ -78,19 +78,19 @@ void vertex() {
 		rot_disp += (TAU/float(num_perspectives)/2.0);
 	//rot_2pi = rot_disp + TAU * float(rot_disp < 0.0);
 	float rot_2pi = fma(TAU, float(rot_disp < 0.0), rot_disp);
-	
+
 	float t = round_to_precision(rot_2pi/TAU, 0.00001);
 	float index = mod(floor(t * float(num_perspectives)), float(num_perspectives));
 	uv_offset_y = index / float(num_perspectives);
-	
+
 	//INSTANCE_CUSTOM.x has the index of what body part to pick from spritesheet.
 	uv_offset_x = INSTANCE_CUSTOM.x / float(num_parts);
 	uv_offset = vec2(uv_offset_x, uv_offset_y);
-	
+
 	//applying scale
 	vec3 scale = vec3(length(MODEL_MATRIX[0]), length(MODEL_MATRIX[1]), length(MODEL_MATRIX[2]));
 	VERTEX *= scale;
-	
+
 	//billboard along local y axis
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			vec4(normalize(cross(y_basis, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
@@ -102,7 +102,7 @@ void vertex() {
 
 void fragment() {
 	vec2 base_uv = UV;
-	
+
 	float uv_y = uv_offset_y + UV.y / float(num_perspectives);
 	float uv_x = uv_offset_x + UV.x / float(num_parts);
 	vec2 uv = uv_offset + vec2(UV.x / float(num_parts), UV.y / float(num_perspectives));
@@ -116,7 +116,7 @@ void fragment() {
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
-	
+
 	ALPHA = sprite_tex.a;
 	ALPHA_SCISSOR_THRESHOLD = alpha_scissor_threshold;
 }
