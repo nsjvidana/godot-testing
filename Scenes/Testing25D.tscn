@@ -1,12 +1,10 @@
-[gd_scene load_steps=37 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=31 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
-[ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="3_w6ty4"]
 [ext_resource type="PackedScene" uid="uid://nksvj23diwrq" path="res://Scenes/character_armature.tscn" id="6_ccf45"]
 [ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/Sprites/pyramid.png" id="6_nbo12"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
-[ext_resource type="Texture2D" uid="uid://d1wsa20scn36f" path="res://Assets/Sprites/player_spritesheet.png" id="6_ohayw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -19,13 +17,6 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 [sub_resource type="SphereMesh" id="SphereMesh_v6h18"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_h1smq"]
-
-[sub_resource type="QuadMesh" id="QuadMesh_sh4oi"]
-material = ExtResource("2_gvc5m")
-
-[sub_resource type="MultiMesh" id="MultiMesh_r6jqf"]
-transform_format = 1
-mesh = SubResource("QuadMesh_sh4oi")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkk3f"]
 atlas = ExtResource("6_nbo12")
@@ -95,14 +86,6 @@ region = Rect2(0, 448, 32, 32)
 atlas = ExtResource("6_nbo12")
 region = Rect2(0, 480, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8xtv0"]
-atlas = ExtResource("6_ohayw")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gdiu4"]
-atlas = ExtResource("6_ohayw")
-region = Rect2(16, 0, 16, 16)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_kn6r1"]
 animations = [{
 "frames": [{
@@ -153,12 +136,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ib1yx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8xtv0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gdiu4")
 }],
 "loop": true,
 "name": &"default",
@@ -201,12 +178,6 @@ mesh = SubResource("SphereMesh_v6h18")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45386, -1.03414e-05, 0.161709)
 mesh = SubResource("PrismMesh_h1smq")
 
-[node name="Pyramid" type="MultiMeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94516, 0.422422, 0)
-multimesh = SubResource("MultiMesh_r6jqf")
-script = ExtResource("3_w6ty4")
-spritesheet = ExtResource("6_nbo12")
-
 [node name="PyramidSprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16874, 0.201513, 0)
 billboard = 1
@@ -219,10 +190,11 @@ perspectives = SubResource("SpriteFrames_kn6r1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
 
-[node name="CharacterArmature" parent="." instance=ExtResource("6_ccf45")]
+[node name="CharacterArmature" parent="." node_paths=PackedStringArray("testObj") instance=ExtResource("6_ccf45")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55897, 0, 0)
 headScale = 1.0
 torsoScale = 1.0
+testObj = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterArmature"]
 transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, 0, 0, 0)

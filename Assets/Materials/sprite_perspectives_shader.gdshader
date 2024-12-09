@@ -83,7 +83,8 @@ void vertex() {
 	float index = mod(floor(t * float(num_perspectives)), float(num_perspectives));
 	uv_offset_y = index / float(num_perspectives);
 	
-	uv_offset_x = float(INSTANCE_ID) / float(num_parts);
+	//INSTANCE_CUSTOM.x has the index of what body part to pick from spritesheet.
+	uv_offset_x = INSTANCE_CUSTOM.x / float(num_parts);
 	uv_offset = vec2(uv_offset_x, uv_offset_y);
 	
 	//applying scale

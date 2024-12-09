@@ -9,6 +9,7 @@ material = ExtResource("1_by8hy")
 
 [sub_resource type="MultiMesh" id="MultiMesh_lauwy"]
 transform_format = 1
+use_custom_data = true
 mesh = SubResource("QuadMesh_qjwnj")
 
 [node name="SpriteMultimesh" type="Node3D"]
