@@ -11,11 +11,13 @@ public partial class Player : CharacterBody3D
 
 	SpringArm3D springArm;
 	SpritePerspective spritePerspective;
+	Node3D characterArmature;
 
     public override void _Ready()
     {
         springArm = GetNode<SpringArm3D>("SpringArm3D");
         spritePerspective = GetNode<Sprite3D>("Sprite3D") as SpritePerspective;
+		characterArmature = GetNode<Node3D>("CharacterArmature");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -44,7 +46,13 @@ public partial class Player : CharacterBody3D
 			velocity.X = direction.X * Speed;
 			velocity.Z = direction.Z * Speed;
 			var lookDir = new Vector2(direction.X, direction.Z);
-			spritePerspective.spriteRot = Quaternion.FromEuler(new Vector3(0f, -new Vector2(0, -1).AngleTo(lookDir), 0f));
+			var rotation = Quaternion.FromEuler(new Vector3(0f, -new Vector2(0, -1).AngleTo(lookDir), 0f));
+
+			characterArmature.GlobalTransform = new Transform3D(
+				new Basis(rotation),
+				characterArmature.GlobalTransform.Origin
+			).ScaledLocal(characterArmature.GlobalTransform.Basis.Scale);
+			// characterArmature.GlobalTransform = Quaternion.FromEuler(new Vector3(0f, -new Vector2(0, -1).AngleTo(lookDir), 0f));
 		}
 		else {
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);

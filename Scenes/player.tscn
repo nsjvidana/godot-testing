@@ -1,10 +1,12 @@
-[gd_scene load_steps=27 format=3 uid="uid://bkk125053kpjy"]
+[gd_scene load_steps=29 format=3 uid="uid://bkk125053kpjy"]
 
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ge12h"]
 [ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="3_plsy7"]
 [ext_resource type="Script" path="res://Scripts/CameraSpringArm.cs" id="4_u5is8"]
 [ext_resource type="Texture2D" uid="uid://cfue3dpuu6v6x" path="res://Assets/Sprites/scarecrow_16_dir.png" id="4_uka1q"]
+[ext_resource type="PackedScene" uid="uid://bigfa7kf45adr" path="res://Scenes/character_armature.tscn" id="6_6g0uo"]
 [ext_resource type="Shader" path="res://Assets/Materials/post_processing_shader.gdshader" id="6_8c1s2"]
+[ext_resource type="Texture2D" uid="uid://d1wsa20scn36f" path="res://Assets/Sprites/player_spritesheet.png" id="7_cevsy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
 radius = 0.158921
@@ -174,3 +176,7 @@ extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_d3r4e")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_t5r23")
+
+[node name="CharacterArmature" parent="." instance=ExtResource("6_6g0uo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+spritesheet = ExtResource("7_cevsy")
