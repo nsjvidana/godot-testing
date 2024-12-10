@@ -94,11 +94,17 @@ void vertex() {
 	//apply part offsets
 	vec3 pos = MODEL_MATRIX[3].xyz - (normalize(dir_to_cam)*INSTANCE_CUSTOM.y);
 	//billboard along local y axis
+	vec3 z_vec = normalize(project_on_plane(MAIN_CAM_INV_VIEW_MATRIX[2].xyz, y_basis));
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-			vec4(normalize(cross(y_basis, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+			vec4(normalize(cross(y_basis, z_vec)), 0.0),
 			vec4(y_basis, 0.0),
-			vec4(normalize(cross(MAIN_CAM_INV_VIEW_MATRIX[0].xyz, y_basis)), 0.0),
+			vec4(z_vec, 0.0),
 			vec4(pos, MODEL_MATRIX[3].w));
+	//MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+			//MAIN_CAM_INV_VIEW_MATRIX[0],
+			//MAIN_CAM_INV_VIEW_MATRIX[1],
+			//MAIN_CAM_INV_VIEW_MATRIX[2],
+			//MODEL_MATRIX[3]);
 	MODELVIEW_NORMAL_MATRIX = mat3(MODELVIEW_MATRIX);
 }
 

@@ -70,7 +70,7 @@ public partial class SpriteArmature : Node3D
         int boneCount = skeleton.GetBoneCount();
         for(int i = 0; i < boneCount; i++) {
             var boneName = skeleton.GetBoneName(i);
-            if(headIdx == -1 && boneName.StartsWith("Head"))
+            if(headIdx == -1 && boneName.Equals("Head"))
                 headIdx = idx;
             else if(torsoIdx == -1 && boneName.StartsWith("Spine"))
                 torsoIdx = idx;
@@ -242,7 +242,7 @@ public partial class SpriteArmature : Node3D
         var right = up.Cross(rot * Vector3.Forward);
         var fwd = right.Cross(up);
         
-        scale = boneDir.Length()*1.1f;
+        scale = boneDir.Length();
         var transform = new Transform3D(
             new Basis(right, up, fwd).Scaled(new Vector3(scale, scale, scale)),
             pos
