@@ -12,6 +12,8 @@ public partial class SpriteArmature : Node3D
     public int spriteSize = 16;
     [Export]
     public Node3D testObj;
+    [Export]
+    public float partOffset = 0.015f;
 
     BoneAttachment3D headBoneHead = new();
     BoneAttachment3D headBoneTail = new();
@@ -193,6 +195,10 @@ public partial class SpriteArmature : Node3D
             lowerArmBoneHeads[1].BoneIdx = lowerArmIdxs[1];
             lowerArmBoneTails[1].BoneIdx = lowerArmIdxs[1]+1;
         #endregion
+
+        #region setting part offsets
+            multimeshInstance.Multimesh.SetInstanceCustomData(3, new Color(2,0,0));
+        #endregion
     }
 
     public override void _Process(double delta)
@@ -204,23 +210,23 @@ public partial class SpriteArmature : Node3D
 
         //legs
         multimeshInstance.Multimesh.SetInstanceTransform(2, CalculateSpriteTransform(upperLegBoneHeads[0], upperLegBoneTails[0], 0));
-            multimeshInstance.Multimesh.SetInstanceCustomData(2, new Color(2,0,0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(2, new Color(2,partOffset,0));
         multimeshInstance.Multimesh.SetInstanceTransform(3, CalculateSpriteTransform(upperLegBoneHeads[1], upperLegBoneTails[1], 0));
-            multimeshInstance.Multimesh.SetInstanceCustomData(3, new Color(2,0,0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(3, new Color(2,-partOffset,0));
 
         multimeshInstance.Multimesh.SetInstanceTransform(4, CalculateSpriteTransform(lowerLegBoneHeads[0], lowerLegBoneTails[0], 0));
-            multimeshInstance.Multimesh.SetInstanceCustomData(4, new Color(3,0,0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(4, new Color(3,partOffset*2,0));
         multimeshInstance.Multimesh.SetInstanceTransform(5, CalculateSpriteTransform(lowerLegBoneHeads[1], lowerLegBoneTails[1], 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(5, new Color(3,0,0));
 
         //arms
         multimeshInstance.Multimesh.SetInstanceTransform(6, CalculateSpriteTransform(upperArmBoneHeads[0], upperArmBoneTails[0], 0));
-            multimeshInstance.Multimesh.SetInstanceCustomData(6, new Color(2,0,0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(6, new Color(2,partOffset,0));
         multimeshInstance.Multimesh.SetInstanceTransform(7, CalculateSpriteTransform(upperArmBoneHeads[1], upperArmBoneTails[1], 0));
-            multimeshInstance.Multimesh.SetInstanceCustomData(7, new Color(2,0,0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(7, new Color(2,-partOffset,0));
 
         multimeshInstance.Multimesh.SetInstanceTransform(8, CalculateSpriteTransform(lowerArmBoneHeads[0], lowerArmBoneTails[0], 0));
-            multimeshInstance.Multimesh.SetInstanceCustomData(8, new Color(3,0,0));
+            multimeshInstance.Multimesh.SetInstanceCustomData(8, new Color(3,partOffset*2,0));
         multimeshInstance.Multimesh.SetInstanceTransform(9, CalculateSpriteTransform(lowerArmBoneHeads[1], lowerArmBoneTails[1], 0));
             multimeshInstance.Multimesh.SetInstanceCustomData(9, new Color(3,0,0));
     }
@@ -231,7 +237,8 @@ public partial class SpriteArmature : Node3D
         var pos = multimeshInstance.ToLocal((boneHead.GlobalPosition + boneTail.GlobalPosition)/2);
         var euler = new Vector3(boneHead.GlobalRotation.Z, boneHead.GlobalRotation.Y, boneHead.GlobalRotation.X);
         var rot = Quaternion.FromEuler(euler);
-        var up = boneDir.Normalized() * Mathf.Sign((boneHead.Transform.Basis.GetRotationQuaternion() * Vector3.Up).Y);
+        var up_dir = Mathf.Sign((boneHead.Transform.Basis.GetRotationQuaternion() * Vector3.Up).Y);
+        var up = boneDir.Normalized() * (up_dir == 0 ? 1f:up_dir);
         var right = up.Cross(rot * Vector3.Forward);
         var fwd = right.Cross(up);
         
