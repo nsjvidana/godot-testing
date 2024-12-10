@@ -8,7 +8,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]
 radius = 0.158921
-height = 1.76981
+height = 1.13851
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hmrye"]
 
@@ -146,7 +146,7 @@ script = ExtResource("1_ge12h")
 Speed = 2.5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0386759, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581713, 0)
 shape = SubResource("CapsuleShape3D_bq1y3")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -163,6 +163,7 @@ perspectives = SubResource("SpriteFrames_x3tb6")
 metadata/_edit_lock_ = true
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58322, 0)
 script = ExtResource("4_u5is8")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]

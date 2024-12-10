@@ -149,7 +149,7 @@ material = ExtResource("2_gvc5m")
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(-0.68, 0, -1.02677e-07, 0, 0.68, 0, 1.02677e-07, 0, -0.68, -0.189718, 0.738943, -1.67856)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.189718, 0.738943, -1.67856)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)

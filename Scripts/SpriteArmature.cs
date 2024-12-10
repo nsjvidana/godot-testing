@@ -49,7 +49,6 @@ public partial class SpriteArmature : Node3D
         var sceneInstance = spriteMultimeshScene.Instantiate();
             AddChild(sceneInstance);
         multimeshInstance = sceneInstance.GetNode<MultiMeshInstance3D>("MultiMeshInstance3D");
-            // multimeshInstance.TopLevel = true;
         
         var mat = multimeshInstance.Multimesh.Mesh.SurfaceGetMaterial(0).Duplicate() as Material;
 		if(mat is ShaderMaterial) {
