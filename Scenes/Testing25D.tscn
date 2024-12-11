@@ -1,9 +1,7 @@
-[gd_scene load_steps=30 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=10 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
-[ext_resource type="Texture2D" uid="uid://cirjmrr5p7uhu" path="res://Assets/Sprites/pyramid.png" id="6_nbo12"]
-[ext_resource type="Script" path="res://Scripts/SpritePerspective.cs" id="6_nlrss"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -16,130 +14,6 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 [sub_resource type="SphereMesh" id="SphereMesh_v6h18"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_h1smq"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fkk3f"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8t8v0"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0e2n1"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 32, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3x0gr"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_puexn"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 96, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eiii6"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q8mr7"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5qgay"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eiukb"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 224, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_du1mv"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 256, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ip70y"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 288, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_510k4"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 320, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bqhyp"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 352, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_il8k1"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 384, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0sp6s"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 416, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7d5xg"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 448, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ib1yx"]
-atlas = ExtResource("6_nbo12")
-region = Rect2(0, 480, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_kn6r1"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8t8v0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0e2n1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3x0gr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_puexn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eiii6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q8mr7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5qgay")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eiukb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_du1mv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ip70y")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_510k4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bqhyp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_il8k1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0sp6s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7d5xg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ib1yx")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
 
 [sub_resource type="QuadMesh" id="QuadMesh_vf1a6"]
 material = ExtResource("2_gvc5m")
@@ -176,14 +50,6 @@ mesh = SubResource("SphereMesh_v6h18")
 [node name="LeftPrism" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.45386, -1.03414e-05, 0.161709)
 mesh = SubResource("PrismMesh_h1smq")
-
-[node name="PyramidSprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.16874, 0.201513, 0)
-billboard = 1
-texture_filter = 0
-texture = SubResource("AtlasTexture_fkk3f")
-script = ExtResource("6_nlrss")
-perspectives = SubResource("SpriteFrames_kn6r1")
 
 [node name="CharacterHead" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.628303, 0.777969, 0, -0.777969, 0.628303, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
