@@ -47,7 +47,7 @@ public partial class Player : CharacterBody3D
 			var rotation = Quaternion.FromEuler(new Vector3(0f, -new Vector2(0, -1).AngleTo(lookDir), 0f));
 
 			characterArmature.GlobalTransform = new Transform3D(
-				new Basis(rotation),
+				characterArmature.GlobalTransform.Basis.Orthonormalized().Slerp(new Basis(rotation), (float)delta/0.1f),
 				characterArmature.GlobalTransform.Origin
 			).ScaledLocal(characterArmature.GlobalTransform.Basis.Scale);
 		}

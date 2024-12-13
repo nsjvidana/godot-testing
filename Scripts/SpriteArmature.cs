@@ -252,7 +252,7 @@ public partial class SpriteArmature : Node3D
         
         float scale = boneDir.Length();
         var transform = globalInv * new Transform3D(
-            new Basis(right, up, fwd).Scaled(new Vector3(scale, scale, scale)),
+            new Basis(right, up, fwd).Orthonormalized().Scaled(new Vector3(scale, scale, scale)),
             pos
         );
         return transform;

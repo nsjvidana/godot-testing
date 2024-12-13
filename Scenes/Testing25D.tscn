@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=9 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
@@ -18,12 +18,10 @@ size = Vector3(11.6311, 0.481567, 13.3203)
 [sub_resource type="QuadMesh" id="QuadMesh_vf1a6"]
 material = ExtResource("2_gvc5m")
 
-[sub_resource type="BoxMesh" id="BoxMesh_nnoop"]
-
 [node name="Node3D" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_pbrwy")]
-transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.739, -1.679)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0.184674, 0)
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0154886, 0, 0.0200028)
@@ -54,11 +52,3 @@ mesh = SubResource("PrismMesh_h1smq")
 [node name="CharacterHead" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.628303, 0.777969, 0, -0.777969, 0.628303, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
-
-[node name="Cube" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 0, 0)
-mesh = SubResource("BoxMesh_nnoop")
-
-[node name="Cube" type="MeshInstance3D" parent="Cube"]
-transform = Transform3D(0.295, 0, 0, 0, 0.295, 0, 0, 0, 0.295, 0, 4.11573, 0)
-mesh = SubResource("BoxMesh_nnoop")
