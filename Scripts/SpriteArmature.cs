@@ -14,6 +14,8 @@ public partial class SpriteArmature : Node3D
     public Node3D testObj;
     [Export]
     public float partOffset = 0.015f;
+    [Export]
+    public AnimationPlayer animation;
 
     BoneAttachment3D headBoneHead = new();
     BoneAttachment3D headBoneTail = new();

@@ -10,12 +10,12 @@ public partial class Player : CharacterBody3D
 	public float JumpVelocity = 4.5f;
 
 	SpringArm3D springArm;
-	Node3D characterArmature;
+	SpriteArmature armature;
 
     public override void _Ready()
     {
         springArm = GetNode<SpringArm3D>("SpringArm3D");
-		characterArmature = GetNode<Node3D>("CharacterArmature");
+		armature = GetNode<Node3D>("CharacterArmature") as SpriteArmature;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -41,17 +41,19 @@ public partial class Player : CharacterBody3D
 		Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 			direction = direction.Rotated(Vector3.Up, springArm.Rotation.Y).Normalized();
 		if (direction != Vector3.Zero) {
+			armature.animation.Play("Run");
 			velocity.X = direction.X * Speed;
 			velocity.Z = direction.Z * Speed;
 			var lookDir = new Vector2(direction.X, direction.Z);
 			var rotation = Quaternion.FromEuler(new Vector3(0f, -new Vector2(0, -1).AngleTo(lookDir), 0f));
 
-			characterArmature.GlobalTransform = new Transform3D(
-				characterArmature.GlobalTransform.Basis.Orthonormalized().Slerp(new Basis(rotation), (float)delta/0.1f),
-				characterArmature.GlobalTransform.Origin
-			).ScaledLocal(characterArmature.GlobalTransform.Basis.Scale);
+			armature.GlobalTransform = new Transform3D(
+				armature.GlobalTransform.Basis.Orthonormalized().Slerp(new Basis(rotation), (float)delta/0.1f),
+				armature.GlobalTransform.Origin
+			).ScaledLocal(armature.GlobalTransform.Basis.Scale);
 		}
 		else {
+			armature.animation.Play("Idle");
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
