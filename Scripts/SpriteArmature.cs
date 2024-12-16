@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 
+[Tool]
 public partial class SpriteArmature : Node3D
 {
     [Export]
@@ -33,9 +34,13 @@ public partial class SpriteArmature : Node3D
     BoneAttachment3D[] lowerArmBoneTails = {new(), new()};
     MultiMeshInstance3D multimeshInstance;
     Skeleton3D skeleton;
+    Node sceneInstance;
 
     public override void _Ready()
     {
+        if(sceneInstance != null)
+            sceneInstance.QueueFree();
+
         if(spriteMultimeshScene == null) {
             GD.PrintErr("Sprite Multimesh Scene is missing for node " + this.Name + "!");
             this.QueueFree();
@@ -48,7 +53,7 @@ public partial class SpriteArmature : Node3D
         }
 
         skeleton = this.GetNode<Skeleton3D>("Armature/Skeleton3D");
-        var sceneInstance = spriteMultimeshScene.Instantiate();
+        sceneInstance = spriteMultimeshScene.Instantiate();
             AddChild(sceneInstance);
         multimeshInstance = sceneInstance.GetNode<MultiMeshInstance3D>("MultiMeshInstance3D");
             multimeshInstance.TopLevel = true;
@@ -205,6 +210,10 @@ public partial class SpriteArmature : Node3D
 
     public override void _Process(double delta)
     {
+        if(Engine.IsEditorHint() && multimeshInstance == null) {
+            this._Ready();
+            return;
+        }
         var mm = multimeshInstance.Multimesh;
         var globalInv = multimeshInstance.GlobalTransform.Inverse();
         // mm.SetInstanceTransform(0, new Transform3D(
