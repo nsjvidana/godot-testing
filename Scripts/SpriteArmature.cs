@@ -224,31 +224,31 @@ public partial class SpriteArmature : Node3D
         var globalInv = multimeshInstance.GlobalTransform.Inverse();
 
         mm.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, globalInv).Translated(new Vector3(0, 0, -0.01f)));
-            mm.SetInstanceCustomData(0, new Color(0,0,0));
+            mm.SetInstanceCustomData(0, new Color(0,0,0.2f));
         mm.SetInstanceTransform(1, CalculateSpriteTransform(spineBoneHead, spineBoneTail, globalInv));
-            mm.SetInstanceCustomData(1, new Color(1,0,0));
+            mm.SetInstanceCustomData(1, new Color(1,0,0.2f));
 
         //legs
         mm.SetInstanceTransform(2, CalculateSpriteTransform(upperLegBoneHeads[0], upperLegBoneTails[0], in globalInv));
-            mm.SetInstanceCustomData(2, new Color(2,partOffset,0));
+            mm.SetInstanceCustomData(2, new Color(2,partOffset,0.2f));
         mm.SetInstanceTransform(3, CalculateSpriteTransform(upperLegBoneHeads[1], upperLegBoneTails[1], in globalInv));
-            mm.SetInstanceCustomData(3, new Color(2,-partOffset,0));
+            mm.SetInstanceCustomData(3, new Color(2,-partOffset,0.2f));
 
         mm.SetInstanceTransform(4, CalculateSpriteTransform(lowerLegBoneHeads[0], lowerLegBoneTails[0], in globalInv));
-            mm.SetInstanceCustomData(4, new Color(3,partOffset*2,0));
+            mm.SetInstanceCustomData(4, new Color(3,partOffset*2,0.2f));
         mm.SetInstanceTransform(5, CalculateSpriteTransform(lowerLegBoneHeads[1], lowerLegBoneTails[1], in globalInv));
-            mm.SetInstanceCustomData(5, new Color(3,0,0));
+            mm.SetInstanceCustomData(5, new Color(3,0,0.2f));
 
         //arms
         mm.SetInstanceTransform(6, CalculateSpriteTransform(upperArmBoneHeads[0], upperArmBoneTails[0], in globalInv));
-            mm.SetInstanceCustomData(6, new Color(2,partOffset,0));
+            mm.SetInstanceCustomData(6, new Color(2,partOffset,0.2f));
         mm.SetInstanceTransform(7, CalculateSpriteTransform(upperArmBoneHeads[1], upperArmBoneTails[1], in globalInv));
-            mm.SetInstanceCustomData(7, new Color(2,-partOffset,0));
+            mm.SetInstanceCustomData(7, new Color(2,-partOffset,0.2f));
 
         mm.SetInstanceTransform(8, CalculateSpriteTransform(lowerArmBoneHeads[0], lowerArmBoneTails[0], in globalInv));
-            mm.SetInstanceCustomData(8, new Color(3,partOffset*2,0));
+            mm.SetInstanceCustomData(8, new Color(3,partOffset*2,0.2f));
         mm.SetInstanceTransform(9, CalculateSpriteTransform(lowerArmBoneHeads[1], lowerArmBoneTails[1], in globalInv));
-            mm.SetInstanceCustomData(9, new Color(3,0,0));
+            mm.SetInstanceCustomData(9, new Color(3,0,0.2f));
     }
 
     static Transform3D CalculateSpriteTransform(BoneAttachment3D boneHead, BoneAttachment3D boneTail, in Transform3D globalInv) {
@@ -262,7 +262,7 @@ public partial class SpriteArmature : Node3D
         var right = up.Cross(rot * Vector3.Forward);
         var fwd = right.Cross(up);
         
-        float scale = boneDir.Length();
+        float scale = boneDir.Length() * 1.1f;
         var transform = globalInv * new Transform3D(
             new Basis(right, up, fwd).Orthonormalized().Scaled(new Vector3(scale, scale, scale)),
             pos

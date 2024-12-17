@@ -88,13 +88,24 @@ void vertex() {
 	VERTEX *= scale;
 
 	//apply part offsets (offset given by INSTANCE_CUSTOM.y)
+	vec3 fwd_proj = normalize(project_on_plane(MAIN_CAM_INV_VIEW_MATRIX[2].xyz, y_basis));
+	vec3 fwd_diff = MAIN_CAM_INV_VIEW_MATRIX[2].xyz - fwd_proj;
+	vec3 fwd = normalize(fwd_proj + fwd_diff*INSTANCE_CUSTOM.z);
 	vec3 pos = MODEL_MATRIX[3].xyz - (normalize(dir_to_cam)*INSTANCE_CUSTOM.y);
-	vec3 up_proj = normalize(project_on_plane(y_basis, MAIN_CAM_INV_VIEW_MATRIX[2].xyz));
+	vec3 up_proj = normalize(project_on_plane(y_basis, fwd));
+	
 	MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-			vec4(normalize(cross(up_proj, MAIN_CAM_INV_VIEW_MATRIX[2].xyz)), 0.0),
+			vec4(normalize(cross(up_proj, fwd)), 0.0),
 			vec4(up_proj, 0),
 			MAIN_CAM_INV_VIEW_MATRIX[2],
 			vec4(pos, MODEL_MATRIX[3].w));
+	
+	//vec3 z_vec = normalize(project_on_plane(MAIN_CAM_INV_VIEW_MATRIX[2].xyz, y_basis));
+	//MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
+		//vec4(normalize(cross(y_basis, z_vec)), 0.0),
+		//vec4(y_basis, 0.0),
+		//vec4(z_vec, 0.0),
+		//vec4(pos, MODEL_MATRIX[3].w));
 	//MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
 			//MAIN_CAM_INV_VIEW_MATRIX[0],
 			//MAIN_CAM_INV_VIEW_MATRIX[1],

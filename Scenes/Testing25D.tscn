@@ -39,7 +39,7 @@ transform = Transform3D(0.999999, 0, 0, 0, -0.738255, 0.674522, 0, -0.674522, -0
 shadow_enabled = true
 
 [node name="ForwardCuboid" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.75392)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56151, 0, -4.75392)
 mesh = SubResource("BoxMesh_fslow")
 
 [node name="RightSphere" type="MeshInstance3D" parent="."]
