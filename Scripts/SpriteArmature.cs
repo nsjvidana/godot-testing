@@ -38,6 +38,8 @@ public partial class SpriteArmature : Node3D
 
     public override void _Ready()
     {
+        if(Engine.IsEditorHint() && spriteMultimeshScene == null || spritesheet == null)
+            return;
         if(sceneInstance != null)
             sceneInstance.QueueFree();
 
@@ -210,17 +212,16 @@ public partial class SpriteArmature : Node3D
 
     public override void _Process(double delta)
     {
-        if(Engine.IsEditorHint() && multimeshInstance == null) {
-            this._Ready();
-            return;
+        if(Engine.IsEditorHint()) {
+            if(spriteMultimeshScene == null || spritesheet == null)
+                return;
+            if(multimeshInstance == null) {
+                this._Ready();
+                return;
+            }
         }
         var mm = multimeshInstance.Multimesh;
         var globalInv = multimeshInstance.GlobalTransform.Inverse();
-        // mm.SetInstanceTransform(0, new Transform3D(
-        //     Basis.Identity.Scaled(new Vector3(0.1f, 0.1f, 0.1f)),
-        //     globalInv * headBoneHead.GlobalTransform.Origin
-        // ));
-        // var pos  = (globalInv * headBoneHead.GlobalTransform).Origin;
 
         mm.SetInstanceTransform(0, CalculateSpriteTransform(headBoneHead, headBoneTail, globalInv).Translated(new Vector3(0, 0, -0.01f)));
             mm.SetInstanceCustomData(0, new Color(0,0,0));
