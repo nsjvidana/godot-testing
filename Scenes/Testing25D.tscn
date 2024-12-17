@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://o00q27fxmm1h"]
+[gd_scene load_steps=10 format=3 uid="uid://o00q27fxmm1h"]
 
 [ext_resource type="PackedScene" uid="uid://bkk125053kpjy" path="res://Scenes/player.tscn" id="1_pbrwy"]
 [ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="2_gvc5m"]
+[ext_resource type="Texture2D" uid="uid://fj77laoenjvh" path="res://Assets/Sprites/test_sprite.png" id="3_oe51u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_oshsr"]
 size = Vector3(11.6311, 0.481567, 13.3203)
@@ -52,3 +53,8 @@ mesh = SubResource("PrismMesh_h1smq")
 [node name="CharacterHead" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.628303, 0.777969, 0, -0.777969, 0.628303, 0, 0, 0, 1, 2.02061, 0.764313, 1.68893)
 mesh = SubResource("QuadMesh_vf1a6")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.566265, 0.929815, 0.357235)
+billboard = 1
+texture = ExtResource("3_oe51u")

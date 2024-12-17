@@ -1,20 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqr88gf35xtc4"]
+[gd_scene load_steps=8 format=3 uid="uid://cqr88gf35xtc4"]
 
-[ext_resource type="Material" uid="uid://c8j14dmqjcl4c" path="res://Assets/Materials/sprite_multimesh_material.tres" id="1_by8hy"]
+[ext_resource type="Shader" path="res://Assets/Materials/sprite_perspectives_shader.gdshader" id="1_8ueun"]
+[ext_resource type="Texture2D" uid="uid://d1wsa20scn36f" path="res://Assets/Sprites/player_spritesheet.png" id="2_c15hy"]
 [ext_resource type="Script" path="res://Scripts/MultiMeshTesting.cs" id="2_egc3u"]
 [ext_resource type="Texture2D" uid="uid://c51bghaybyskp" path="res://Assets/Sprites/player_head.png" id="3_rmb6b"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1tuhs"]
+render_priority = 0
+shader = ExtResource("1_8ueun")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/sprite_size = 16
+shader_parameter/spritesheet = ExtResource("2_c15hy")
+
 [sub_resource type="QuadMesh" id="QuadMesh_qjwnj"]
-material = ExtResource("1_by8hy")
+material = SubResource("ShaderMaterial_1tuhs")
 
 [sub_resource type="MultiMesh" id="MultiMesh_lauwy"]
 transform_format = 1
 use_custom_data = true
+instance_count = 10
 mesh = SubResource("QuadMesh_qjwnj")
+buffer = PackedFloat32Array(0.379149, 2.30773e-15, 5.72499e-08, 1.00335e-14, 1.67816e-15, 0.379149, -2.63973e-08, 0.946617, -5.72499e-08, 2.63973e-08, 0.379149, -0.01, 0, 0, 0, 1, 0.428843, 0, 6.47534e-08, 7.68185e-15, 2.68222e-22, 0.428843, -1.77636e-15, 0.58465, -6.47534e-08, 1.77636e-15, 0.428843, -2.57589e-08, 1, 0, 0, 1, -0.208584, 0.0293056, -0.0513933, -0.0582863, 0.0162554, 0.209483, 0.0534781, 0.306136, 0.0568845, 0.0475954, -0.20373, -0.0238299, 2, 0.005, 0, 1, -0.216008, -0.0159699, -0.00962788, 0.0532372, -0.0183729, 0.201408, 0.0781311, 0.310173, 0.00318889, 0.0786575, -0.202015, -0.0394289, 2, -0.005, 0, 1, -0.205853, -0.00876625, -0.0674872, -0.068556, 0.016693, 0.201932, -0.0771477, 0.100428, 0.0659752, -0.0784448, -0.191052, -0.00840526, 3, 0.01, 0, 1, -0.215979, -0.015655, 0.0107296, 0.0690496, -0.0176757, 0.210556, -0.0485884, 0.104192, -0.00691166, -0.0492767, -0.211024, -0.0541193, 3, 0, 0, 1, -0.225835, 0.0927621, 0.0291135, -0.146381, 0.0909105, 0.227579, -0.0199204, 0.685282, -0.0344628, -0.0075323, -0.24333, 0.004165, 2, 0.005, 0, 1, -0.224122, -0.0927621, 0.0402278, 0.146381, -0.0926899, 0.227579, 0.00837368, 0.685282, -0.0403938, -0.00753228, -0.242416, 0.00369626, 2, -0.005, 0, 1, -0.241434, -0.0461413, 0.00585086, -0.169691, -0.0459195, 0.241388, 0.00878358, 0.450798, -0.00739246, 0.00753229, -0.245647, 0.004165, 3, 0.01, 0, 1, -0.241231, 0.0461413, 0.0115029, 0.169691, 0.0464317, 0.241388, 0.00546317, 0.450798, -0.0102678, 0.00753228, -0.245543, 0.00369626, 3, 0, 0, 1)
 
 [node name="SpriteMultimesh" type="Node3D"]
 
 [node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+cast_shadow = 0
 multimesh = SubResource("MultiMesh_lauwy")
 script = ExtResource("2_egc3u")
 spritesheet = ExtResource("3_rmb6b")
