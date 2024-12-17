@@ -17,8 +17,6 @@ uniform float metallic : hint_range(0.0, 1.0, 0.01);
 uniform sampler2D spritesheet: filter_nearest;
 uniform int sprite_size;
 
-varying float uv_offset_y;
-varying float uv_offset_x;
 varying vec2 uv_offset;
 varying flat int num_parts;
 varying flat int num_perspectives;
@@ -73,7 +71,7 @@ void vertex() {
 
 	float rot_disp = signed_angle_to(dir_proj, dir_to_cam_proj, -local_y);
 		//add extra perspective's angle since the spritesheet's perspectives
-		//dont loop back to the 0-degree perspective to conserve memory usage
+		//dont loop back to the 0-degree perspective to conserve memory
 		//rot_disp += (TAU/float(num_perspectives)/2.0) * length(MODEL_MATRIX[1]);
 		rot_disp += (TAU/float(num_perspectives)/2.0);
 	//rot_2pi = rot_disp + TAU * float(rot_disp < 0.0);
@@ -81,17 +79,15 @@ void vertex() {
 
 	float t = round_to_precision(rot_2pi/TAU, 0.00001);
 	float index = mod(floor(t * float(num_perspectives)), float(num_perspectives));
-	uv_offset_y = index / float(num_perspectives);
 
-	//INSTANCE_CUSTOM.x has the index of what body part to pick from spritesheet.
-	uv_offset_x = INSTANCE_CUSTOM.x / float(num_parts);
-	uv_offset = vec2(uv_offset_x, uv_offset_y);
+	//INSTANCE_CUSTOM.x has the index of what body part to pick from spritesheet
+	uv_offset = vec2(INSTANCE_CUSTOM.x / float(num_parts), index / float(num_perspectives));
 
 	//applying scale
 	vec3 scale = vec3(length(MODEL_MATRIX[0]), length(MODEL_MATRIX[1]), length(MODEL_MATRIX[2]));
 	VERTEX *= scale;
 
-	//apply part offsets
+	//apply part offsets (offset given by INSTANCE_CUSTOM.y)
 	vec3 pos = MODEL_MATRIX[3].xyz - (normalize(dir_to_cam)*INSTANCE_CUSTOM.y);
 	//billboard along local y axis
 	vec3 z_vec = normalize(project_on_plane(MAIN_CAM_INV_VIEW_MATRIX[2].xyz, y_basis));
@@ -111,8 +107,6 @@ void vertex() {
 void fragment() {
 	vec2 base_uv = UV;
 
-	float uv_y = uv_offset_y + UV.y / float(num_perspectives);
-	float uv_x = uv_offset_x + UV.x / float(num_parts);
 	vec2 uv = uv_offset + vec2(UV.x / float(num_parts), UV.y / float(num_perspectives));
 	vec4 sprite_tex = texture(spritesheet, uv);
 	ALBEDO.rgb = albedo.rgb * sprite_tex.rgb;

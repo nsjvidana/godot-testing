@@ -251,7 +251,7 @@ public partial class SpriteArmature : Node3D
             mm.SetInstanceCustomData(9, new Color(3,0,0));
     }
 
-    Transform3D CalculateSpriteTransform(BoneAttachment3D boneHead, BoneAttachment3D boneTail, in Transform3D globalInv) {
+    static Transform3D CalculateSpriteTransform(BoneAttachment3D boneHead, BoneAttachment3D boneTail, in Transform3D globalInv) {
         var boneDir = boneTail.GlobalPosition - boneHead.GlobalPosition;
 
         var pos = (boneHead.GlobalPosition + boneTail.GlobalPosition)/2;
