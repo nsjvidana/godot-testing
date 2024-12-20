@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="1_ge12h"]
 [ext_resource type="Script" path="res://Scripts/CameraSpringArm.cs" id="4_u5is8"]
 [ext_resource type="PackedScene" uid="uid://bigfa7kf45adr" path="res://Scenes/character_armature.tscn" id="6_6g0uo"]
-[ext_resource type="Shader" path="res://Assets/Materials/post_processing_shader.gdshader" id="6_8c1s2"]
+[ext_resource type="Shader" path="res://Assets/post_processing_shader.gdshader" id="6_8c1s2"]
 [ext_resource type="Texture2D" uid="uid://d1wsa20scn36f" path="res://Assets/Sprites/player_spritesheet.png" id="7_cevsy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bq1y3"]

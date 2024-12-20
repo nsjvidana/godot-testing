@@ -255,7 +255,7 @@ public partial class SpriteArmature : Node3D
         var boneDir = boneTail.GlobalPosition - boneHead.GlobalPosition;
 
         var pos = (boneHead.GlobalPosition + boneTail.GlobalPosition)/2;
-        var euler = new Vector3(boneHead.GlobalRotation.Z, boneHead.GlobalRotation.Y, boneHead.GlobalRotation.X);
+        var euler = new Vector3(boneHead.GlobalRotation.X, boneHead.GlobalRotation.Y, boneHead.GlobalRotation.Z);
         var rot = Quaternion.FromEuler(euler);
         var up_dir = Mathf.Sign((boneHead.Transform.Basis.GetRotationQuaternion() * Vector3.Up).Y);
         var up = boneDir.Normalized() * (up_dir == 0 ? 1f:up_dir);
